@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.7.0] - 2026-JUN-18
+
+### Changed
+
+- Moved the canonical repository to [coinbase/prime-sdk-dotnet](https://github.com/coinbase/prime-sdk-dotnet).
+- Added GitHub Actions for format, lint, test, Salus security scan, and NuGet publish.
+- Added `.github/CODEOWNERS` for `@coinbase/prime-sdk-dotnet-write` and `@coinbase/prime-sdk-dotnet-admin`.
+
+### Notes
+
+- No intentional API breaking changes; minor bump signals repository migration.
+- Equivalent to **0.6.0** on coinbase-samples aside from repository and tooling.
+- First NuGet release from the canonical repository; includes accumulated changes from unpublished **0.5.0** and **0.6.0**.
+
 ## [0.6.0] - 2026-JUN-17
 
 ### Added

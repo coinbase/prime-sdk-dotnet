@@ -2,13 +2,14 @@
 
   <PropertyGroup>
     <Description>Coinbase Prime .NET SDK</Description>
-    <Version>0.6.0</Version>
+    <Version>0.7.0</Version>
     <Authors>Coinbase</Authors>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageTags>coinbase</PackageTags>
-    <PackageProjectUrl>https://github.com/coinbase-samples/prime-sdk-dotnet</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/coinbase/prime-sdk-dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/coinbase/prime-sdk-dotnet</RepositoryUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <SignAssembly>True</SignAssembly>
