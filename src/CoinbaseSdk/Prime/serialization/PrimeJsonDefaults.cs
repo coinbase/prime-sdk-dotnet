@@ -27,7 +27,7 @@ namespace CoinbaseSdk.Prime.Serialization
   public static class PrimeJsonDefaults
   {
     private static readonly Lazy<IJsonUtility> CachedJsonUtility =
-        new (() => new Core.Serialization.JsonUtility(CreateOptions()));
+        new(() => new Core.Serialization.JsonUtility(CreateOptions()));
 
     /// <summary>
     /// Shared Prime HTTP serializer (snake_case naming policy, Core converters).
