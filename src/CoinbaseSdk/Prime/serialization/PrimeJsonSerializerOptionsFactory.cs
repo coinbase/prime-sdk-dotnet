@@ -25,7 +25,7 @@ namespace CoinbaseSdk.Prime.Serialization
   /// </summary>
   internal static class PrimeJsonSerializerOptionsFactory
   {
-    private static readonly Lazy<JsonSerializerOptions> CachedOptions = new(CreateOptions);
+    private static readonly Lazy<JsonSerializerOptions> CachedOptions = new (CreateOptions);
 
     /// <summary>
     /// Gets the cached serializer options used throughout the SDK.
@@ -35,7 +35,7 @@ namespace CoinbaseSdk.Prime.Serialization
     /// <summary>
     /// Clone the cached options. Useful when a caller must mutate settings locally.
     /// </summary>
-    internal static JsonSerializerOptions Clone() => new(CachedOptions.Value);
+    internal static JsonSerializerOptions Clone() => new (CachedOptions.Value);
 
     private static JsonSerializerOptions CreateOptions()
     {
