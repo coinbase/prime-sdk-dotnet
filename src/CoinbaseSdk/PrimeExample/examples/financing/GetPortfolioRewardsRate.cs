@@ -27,48 +27,48 @@ using CoinbaseSdk.Prime.Common;
 // Load environment variables
 DotNetEnv.Env.TraversePath().Load();
 
-var entityIdOption = new Option<string?>(
-    name: "--entityId",
-    description: "The Entity ID");
+var portfolioIdOption = new Option<string?>(
+    name: "--portfolioId",
+    description: "The Portfolio ID");
 
-var rootCommand = new RootCommand("Get X M Liquidation")
+var rootCommand = new RootCommand("Get Portfolio Rewards Rate")
 {
-    entityIdOption,
+    portfolioIdOption,
 };
 
-rootCommand.SetHandler((entityId) =>
+rootCommand.SetHandler((portfolioId) =>
 {
-    entityId ??= Environment.GetEnvironmentVariable("PRIME_ENTITY_ID");
+    portfolioId ??= Environment.GetEnvironmentVariable("PRIME_PORTFOLIO_ID");
 
-    if (string.IsNullOrEmpty(entityId))
+    if (string.IsNullOrEmpty(portfolioId))
     {
-        Console.Error.WriteLine("Error: --entityId is required (or set PRIME_ENTITY_ID env var).");
+        Console.Error.WriteLine("Error: --portfolioId is required (or set PRIME_PORTFOLIO_ID env var).");
         Environment.ExitCode = 1;
         return;
     }
 
     try
     {
-        Console.WriteLine($"Using EntityId: {entityId}");
+        Console.WriteLine($"Using PortfolioId: {portfolioId}");
 
         var client = CoinbasePrimeClient.FromEnv();
         var financingService = new FinancingService(client);
 
-        var request = new GetXMLiquidationRequest(entityId);
+        var request = new GetPortfolioRewardsRateRequest(portfolioId);
 
-        PrettyPrinter.PrintResponse("GetXMLiquidationRequest", request);
+        PrettyPrinter.PrintResponse("GetPortfolioRewardsRateRequest", request);
 
-        var response = financingService.GetXMLiquidation(request);
+        var response = financingService.GetPortfolioRewardsRate(request);
 
-        PrettyPrinter.PrintResponse("GetXMLiquidationResponse", response);
+        PrettyPrinter.PrintResponse("GetPortfolioRewardsRateResponse", response);
 
         Environment.ExitCode = 0;
     }
     catch (Exception ex)
     {
-        PrettyPrinter.PrintError("Error calling GetXMLiquidation", ex);
+        PrettyPrinter.PrintError("Error calling GetPortfolioRewardsRate", ex);
         Environment.ExitCode = 1;
     }
-}, entityIdOption);
+}, portfolioIdOption);
 
 return rootCommand.Invoke(args);

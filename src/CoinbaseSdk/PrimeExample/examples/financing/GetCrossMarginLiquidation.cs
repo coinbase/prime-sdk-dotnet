@@ -31,7 +31,7 @@ var entityIdOption = new Option<string?>(
     name: "--entityId",
     description: "The Entity ID");
 
-var rootCommand = new RootCommand("List X M Liquidations")
+var rootCommand = new RootCommand("Get Cross Margin Liquidation")
 {
     entityIdOption,
 };
@@ -54,19 +54,19 @@ rootCommand.SetHandler((entityId) =>
         var client = CoinbasePrimeClient.FromEnv();
         var financingService = new FinancingService(client);
 
-        var request = new ListXMLiquidationsRequest(entityId);
+        var request = new GetCrossMarginLiquidationRequest(entityId);
 
-        PrettyPrinter.PrintResponse("ListXMLiquidationsRequest", request);
+        PrettyPrinter.PrintResponse("GetCrossMarginLiquidationRequest", request);
 
-        var response = financingService.ListXMLiquidations(request);
+        var response = financingService.GetCrossMarginLiquidation(request);
 
-        PrettyPrinter.PrintResponse("ListXMLiquidationsResponse", response);
+        PrettyPrinter.PrintResponse("GetCrossMarginLiquidationResponse", response);
 
         Environment.ExitCode = 0;
     }
     catch (Exception ex)
     {
-        PrettyPrinter.PrintError("Error calling ListXMLiquidations", ex);
+        PrettyPrinter.PrintError("Error calling GetCrossMarginLiquidation", ex);
         Environment.ExitCode = 1;
     }
 }, entityIdOption);

@@ -23,7 +23,11 @@ namespace CoinbaseSdk.Tools.Generator.Processing;
 
 public static class OperationBindingGenerator
 {
-  private const string OperationIdPrefix = "PrimeRESTAPI_";
+  private static readonly string[] OperationIdPrefixes =
+  [
+    "PrimeRESTAPI_",
+    "PrimeBeta_",
+  ];
 
   private static readonly Dictionary<string, string> KnownSdkMethodRenames = new(StringComparer.Ordinal)
   {
@@ -35,6 +39,8 @@ public static class OperationBindingGenerator
     ["CreateWalletTransfer"] = "CreateTransfer",
     ["CreateWalletWithdrawal"] = "CreateWithdrawal",
     ["CreateQuoteRequest"] = "CreateQuote",
+    ["GetXMLiquidation"] = "GetCrossMarginLiquidation",
+    ["ListXMLiquidations"] = "ListCrossMarginLiquidations",
   };
 
   public static List<SdkOperationBinding> DeriveAll(
@@ -74,7 +80,7 @@ public static class OperationBindingGenerator
     };
   }
 
-  private static string DeriveSdkMethod(ParsedOperation op, SharedTransforms transforms)
+  internal static string DeriveSdkMethod(ParsedOperation op, SharedTransforms transforms)
   {
     if (!string.IsNullOrWhiteSpace(op.ExtensionSdkMethodName))
     {
@@ -83,11 +89,7 @@ public static class OperationBindingGenerator
       return transforms.ApplyWeb3ToOnchainName(ext);
     }
 
-    var name = op.OperationId;
-    if (name.StartsWith(OperationIdPrefix, StringComparison.Ordinal))
-    {
-      name = name[OperationIdPrefix.Length..];
-    }
+    var name = StripKnownOperationIdPrefix(op.OperationId);
 
     name = transforms.NormalizeAcronyms(name);
     name = transforms.ApplyWeb3ToOnchainName(name);
@@ -106,6 +108,19 @@ public static class OperationBindingGenerator
 
     name = ApplyPortfolioPathPrefix(name, op);
     return name;
+  }
+
+  private static string StripKnownOperationIdPrefix(string operationId)
+  {
+    foreach (var prefix in OperationIdPrefixes)
+    {
+      if (operationId.StartsWith(prefix, StringComparison.Ordinal))
+      {
+        return operationId[prefix.Length..];
+      }
+    }
+
+    return operationId;
   }
 
   /// <summary>

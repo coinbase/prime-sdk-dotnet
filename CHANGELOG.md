@@ -11,6 +11,8 @@
 ### Changed
 
 - Unsuccessful HTTP responses now throw **`CoinbasePrimeException`** (still a **`CoinbaseException`**) instead of a message-only exception that dropped status and error codes.
+- **`GetXMLiquidation`** / **`ListXMLiquidations`** renamed to **`GetCrossMarginLiquidation`** / **`ListCrossMarginLiquidations`** (request/response types follow the same names).
+- Reward rate methods drop the **`PrimeBeta_`** prefix: **`GetEntityRewardsRate`**, **`GetPortfolioRewardsRate`**.
 
 ## [0.7.0] - 2026-JUN-18
 

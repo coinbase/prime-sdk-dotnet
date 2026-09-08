@@ -22,16 +22,16 @@ namespace CoinbaseSdk.Prime.Financing
   /// <summary>
   /// Get Portfolio Rewards Rate (Beta).
   /// </summary>
-  public class PrimeBeta_GetPortfolioRewardsRateRequest(string portfolioId)
+  public class GetPortfolioRewardsRateRequest(string portfolioId)
   {
     [JsonIgnore]
     public string PortfolioId { get; set; } = portfolioId;
 
-    public class PrimeBeta_GetPortfolioRewardsRateRequestBuilder
+    public class GetPortfolioRewardsRateRequestBuilder
     {
       private string? _portfolioId;
 
-      public PrimeBeta_GetPortfolioRewardsRateRequestBuilder WithPortfolioId(string portfolioId)
+      public GetPortfolioRewardsRateRequestBuilder WithPortfolioId(string portfolioId)
       {
         _portfolioId = portfolioId;
         return this;
@@ -45,10 +45,10 @@ namespace CoinbaseSdk.Prime.Financing
         }
       }
 
-      public PrimeBeta_GetPortfolioRewardsRateRequest Build()
+      public GetPortfolioRewardsRateRequest Build()
       {
         Validate();
-        return new PrimeBeta_GetPortfolioRewardsRateRequest(_portfolioId!)
+        return new GetPortfolioRewardsRateRequest(_portfolioId!)
         {
         };
       }

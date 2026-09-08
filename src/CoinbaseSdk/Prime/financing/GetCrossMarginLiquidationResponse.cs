@@ -19,14 +19,12 @@ namespace CoinbaseSdk.Prime.Financing
   using CoinbaseSdk.Prime.Model;
 
   /// <summary>
-  /// Get Portfolio Rewards Rate (Beta).
+  /// Get Cross Margin Liquidation.
   /// </summary>
-  public class PrimeBeta_GetPortfolioRewardsRateResponse
+  public class GetCrossMarginLiquidationResponse
   {
-    public string? CurrentRate { get; set; }
+    public XmLiquidationDetail Liquidation { get; set; }
 
-    public BetaRewardsRateTier[] AvailableRates { get; set; } = [];
-
-    public PrimeBeta_GetPortfolioRewardsRateResponse() { }
+    public GetCrossMarginLiquidationResponse() { }
   }
 }

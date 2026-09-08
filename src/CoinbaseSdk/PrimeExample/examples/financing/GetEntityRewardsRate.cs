@@ -31,7 +31,7 @@ var entityIdOption = new Option<string?>(
     name: "--entityId",
     description: "The Entity ID");
 
-var rootCommand = new RootCommand("Prime Beta_ Get Entity Rewards Rate")
+var rootCommand = new RootCommand("Get Entity Rewards Rate")
 {
     entityIdOption,
 };
@@ -54,19 +54,19 @@ rootCommand.SetHandler((entityId) =>
         var client = CoinbasePrimeClient.FromEnv();
         var financingService = new FinancingService(client);
 
-        var request = new PrimeBeta_GetEntityRewardsRateRequest(entityId);
+        var request = new GetEntityRewardsRateRequest(entityId);
 
-        PrettyPrinter.PrintResponse("PrimeBeta_GetEntityRewardsRateRequest", request);
+        PrettyPrinter.PrintResponse("GetEntityRewardsRateRequest", request);
 
-        var response = financingService.PrimeBeta_GetEntityRewardsRate(request);
+        var response = financingService.GetEntityRewardsRate(request);
 
-        PrettyPrinter.PrintResponse("PrimeBeta_GetEntityRewardsRateResponse", response);
+        PrettyPrinter.PrintResponse("GetEntityRewardsRateResponse", response);
 
         Environment.ExitCode = 0;
     }
     catch (Exception ex)
     {
-        PrettyPrinter.PrintError("Error calling PrimeBeta_GetEntityRewardsRate", ex);
+        PrettyPrinter.PrintError("Error calling GetEntityRewardsRate", ex);
         Environment.ExitCode = 1;
     }
 }, entityIdOption);

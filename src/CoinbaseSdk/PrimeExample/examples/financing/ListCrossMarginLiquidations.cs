@@ -27,48 +27,48 @@ using CoinbaseSdk.Prime.Common;
 // Load environment variables
 DotNetEnv.Env.TraversePath().Load();
 
-var portfolioIdOption = new Option<string?>(
-    name: "--portfolioId",
-    description: "The Portfolio ID");
+var entityIdOption = new Option<string?>(
+    name: "--entityId",
+    description: "The Entity ID");
 
-var rootCommand = new RootCommand("Prime Beta_ Get Portfolio Rewards Rate")
+var rootCommand = new RootCommand("List Cross Margin Liquidations")
 {
-    portfolioIdOption,
+    entityIdOption,
 };
 
-rootCommand.SetHandler((portfolioId) =>
+rootCommand.SetHandler((entityId) =>
 {
-    portfolioId ??= Environment.GetEnvironmentVariable("PRIME_PORTFOLIO_ID");
+    entityId ??= Environment.GetEnvironmentVariable("PRIME_ENTITY_ID");
 
-    if (string.IsNullOrEmpty(portfolioId))
+    if (string.IsNullOrEmpty(entityId))
     {
-        Console.Error.WriteLine("Error: --portfolioId is required (or set PRIME_PORTFOLIO_ID env var).");
+        Console.Error.WriteLine("Error: --entityId is required (or set PRIME_ENTITY_ID env var).");
         Environment.ExitCode = 1;
         return;
     }
 
     try
     {
-        Console.WriteLine($"Using PortfolioId: {portfolioId}");
+        Console.WriteLine($"Using EntityId: {entityId}");
 
         var client = CoinbasePrimeClient.FromEnv();
         var financingService = new FinancingService(client);
 
-        var request = new PrimeBeta_GetPortfolioRewardsRateRequest(portfolioId);
+        var request = new ListCrossMarginLiquidationsRequest(entityId);
 
-        PrettyPrinter.PrintResponse("PrimeBeta_GetPortfolioRewardsRateRequest", request);
+        PrettyPrinter.PrintResponse("ListCrossMarginLiquidationsRequest", request);
 
-        var response = financingService.PrimeBeta_GetPortfolioRewardsRate(request);
+        var response = financingService.ListCrossMarginLiquidations(request);
 
-        PrettyPrinter.PrintResponse("PrimeBeta_GetPortfolioRewardsRateResponse", response);
+        PrettyPrinter.PrintResponse("ListCrossMarginLiquidationsResponse", response);
 
         Environment.ExitCode = 0;
     }
     catch (Exception ex)
     {
-        PrettyPrinter.PrintError("Error calling PrimeBeta_GetPortfolioRewardsRate", ex);
+        PrettyPrinter.PrintError("Error calling ListCrossMarginLiquidations", ex);
         Environment.ExitCode = 1;
     }
-}, portfolioIdOption);
+}, entityIdOption);
 
 return rootCommand.Invoke(args);

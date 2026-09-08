@@ -20,20 +20,29 @@ namespace CoinbaseSdk.Prime.Financing
   using CoinbaseSdk.Core.Error;
 
   /// <summary>
-  /// Get Entity Rewards Rate (Beta).
+  /// Get Cross Margin Liquidation.
   /// </summary>
-  public class PrimeBeta_GetEntityRewardsRateRequest(string entityId)
+  public class GetCrossMarginLiquidationRequest(string entityId)
   {
     [JsonIgnore]
     public string EntityId { get; set; } = entityId;
 
-    public class PrimeBeta_GetEntityRewardsRateRequestBuilder
+    public string? LiquidationId { get; set; }
+
+    public class GetCrossMarginLiquidationRequestBuilder
     {
       private string? _entityId;
+      private string? _liquidationId;
 
-      public PrimeBeta_GetEntityRewardsRateRequestBuilder WithEntityId(string entityId)
+      public GetCrossMarginLiquidationRequestBuilder WithEntityId(string entityId)
       {
         _entityId = entityId;
+        return this;
+      }
+
+      public GetCrossMarginLiquidationRequestBuilder WithLiquidationId(string? liquidationId)
+      {
+        _liquidationId = liquidationId;
         return this;
       }
 
@@ -45,11 +54,12 @@ namespace CoinbaseSdk.Prime.Financing
         }
       }
 
-      public PrimeBeta_GetEntityRewardsRateRequest Build()
+      public GetCrossMarginLiquidationRequest Build()
       {
         Validate();
-        return new PrimeBeta_GetEntityRewardsRateRequest(_entityId!)
+        return new GetCrossMarginLiquidationRequest(_entityId!)
         {
+          LiquidationId = _liquidationId,
         };
       }
     }

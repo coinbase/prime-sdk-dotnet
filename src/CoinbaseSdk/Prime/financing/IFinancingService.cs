@@ -211,24 +211,24 @@ namespace CoinbaseSdk.Prime.Financing
     /// <summary>
     /// Get Cross Margin Liquidation.
     /// </summary>
-    public GetXMLiquidationResponse GetXMLiquidation(
-      GetXMLiquidationRequest request,
+    public GetCrossMarginLiquidationResponse GetCrossMarginLiquidation(
+      GetCrossMarginLiquidationRequest request,
       CallOptions? options = null);
 
-    public Task<GetXMLiquidationResponse> GetXMLiquidationAsync(
-      GetXMLiquidationRequest request,
+    public Task<GetCrossMarginLiquidationResponse> GetCrossMarginLiquidationAsync(
+      GetCrossMarginLiquidationRequest request,
       CallOptions? options = null,
       CancellationToken cancellationToken = default);
 
     /// <summary>
     /// List Cross Margin Liquidations.
     /// </summary>
-    public ListXMLiquidationsResponse ListXMLiquidations(
-      ListXMLiquidationsRequest request,
+    public ListCrossMarginLiquidationsResponse ListCrossMarginLiquidations(
+      ListCrossMarginLiquidationsRequest request,
       CallOptions? options = null);
 
-    public Task<ListXMLiquidationsResponse> ListXMLiquidationsAsync(
-      ListXMLiquidationsRequest request,
+    public Task<ListCrossMarginLiquidationsResponse> ListCrossMarginLiquidationsAsync(
+      ListCrossMarginLiquidationsRequest request,
       CallOptions? options = null,
       CancellationToken cancellationToken = default);
 
@@ -247,24 +247,24 @@ namespace CoinbaseSdk.Prime.Financing
     /// <summary>
     /// Get Entity Rewards Rate (Beta).
     /// </summary>
-    public PrimeBeta_GetEntityRewardsRateResponse PrimeBeta_GetEntityRewardsRate(
-      PrimeBeta_GetEntityRewardsRateRequest request,
+    public GetEntityRewardsRateResponse GetEntityRewardsRate(
+      GetEntityRewardsRateRequest request,
       CallOptions? options = null);
 
-    public Task<PrimeBeta_GetEntityRewardsRateResponse> PrimeBeta_GetEntityRewardsRateAsync(
-      PrimeBeta_GetEntityRewardsRateRequest request,
+    public Task<GetEntityRewardsRateResponse> GetEntityRewardsRateAsync(
+      GetEntityRewardsRateRequest request,
       CallOptions? options = null,
       CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get Portfolio Rewards Rate (Beta).
     /// </summary>
-    public PrimeBeta_GetPortfolioRewardsRateResponse PrimeBeta_GetPortfolioRewardsRate(
-      PrimeBeta_GetPortfolioRewardsRateRequest request,
+    public GetPortfolioRewardsRateResponse GetPortfolioRewardsRate(
+      GetPortfolioRewardsRateRequest request,
       CallOptions? options = null);
 
-    public Task<PrimeBeta_GetPortfolioRewardsRateResponse> PrimeBeta_GetPortfolioRewardsRateAsync(
-      PrimeBeta_GetPortfolioRewardsRateRequest request,
+    public Task<GetPortfolioRewardsRateResponse> GetPortfolioRewardsRateAsync(
+      GetPortfolioRewardsRateRequest request,
       CallOptions? options = null,
       CancellationToken cancellationToken = default);
 

@@ -16,17 +16,18 @@
 
 namespace CoinbaseSdk.Prime.Financing
 {
+  using CoinbaseSdk.Prime.Common;
   using CoinbaseSdk.Prime.Model;
 
   /// <summary>
-  /// Get Entity Rewards Rate (Beta).
+  /// List Cross Margin Liquidations.
   /// </summary>
-  public class PrimeBeta_GetEntityRewardsRateResponse
+  public class ListCrossMarginLiquidationsResponse
   {
-    public string? CurrentRate { get; set; }
+    public XmLiquidationSummary[] Liquidations { get; set; } = [];
 
-    public BetaRewardsRateTier[] AvailableRates { get; set; } = [];
+    public Pagination Pagination { get; set; }
 
-    public PrimeBeta_GetEntityRewardsRateResponse() { }
+    public ListCrossMarginLiquidationsResponse() { }
   }
 }

@@ -24,7 +24,7 @@ namespace CoinbaseSdk.Prime.Financing
   /// <summary>
   /// List Cross Margin Liquidations.
   /// </summary>
-  public class ListXMLiquidationsRequest(string entityId) : PaginatedRequest
+  public class ListCrossMarginLiquidationsRequest(string entityId) : PaginatedRequest
   {
     [JsonIgnore]
     public string EntityId { get; set; } = entityId;
@@ -35,7 +35,7 @@ namespace CoinbaseSdk.Prime.Financing
 
     public string? EndTime { get; set; }
 
-    public class ListXMLiquidationsRequestBuilder
+    public class ListCrossMarginLiquidationsRequestBuilder
     {
       private string? _entityId;
       private string? _status;
@@ -45,43 +45,43 @@ namespace CoinbaseSdk.Prime.Financing
       private SortDirection? _sortDirection;
       private int? _limit;
 
-      public ListXMLiquidationsRequestBuilder WithEntityId(string entityId)
+      public ListCrossMarginLiquidationsRequestBuilder WithEntityId(string entityId)
       {
         _entityId = entityId;
         return this;
       }
 
-      public ListXMLiquidationsRequestBuilder WithStatus(string? status)
+      public ListCrossMarginLiquidationsRequestBuilder WithStatus(string? status)
       {
         _status = status;
         return this;
       }
 
-      public ListXMLiquidationsRequestBuilder WithStartTime(string? startTime)
+      public ListCrossMarginLiquidationsRequestBuilder WithStartTime(string? startTime)
       {
         _startTime = startTime;
         return this;
       }
 
-      public ListXMLiquidationsRequestBuilder WithEndTime(string? endTime)
+      public ListCrossMarginLiquidationsRequestBuilder WithEndTime(string? endTime)
       {
         _endTime = endTime;
         return this;
       }
 
-      public ListXMLiquidationsRequestBuilder WithCursor(string cursor)
+      public ListCrossMarginLiquidationsRequestBuilder WithCursor(string cursor)
       {
         _cursor = cursor;
         return this;
       }
 
-      public ListXMLiquidationsRequestBuilder WithSortDirection(SortDirection sortDirection)
+      public ListCrossMarginLiquidationsRequestBuilder WithSortDirection(SortDirection sortDirection)
       {
         _sortDirection = sortDirection;
         return this;
       }
 
-      public ListXMLiquidationsRequestBuilder WithLimit(int limit)
+      public ListCrossMarginLiquidationsRequestBuilder WithLimit(int limit)
       {
         _limit = limit;
         return this;
@@ -95,10 +95,10 @@ namespace CoinbaseSdk.Prime.Financing
         }
       }
 
-      public ListXMLiquidationsRequest Build()
+      public ListCrossMarginLiquidationsRequest Build()
       {
         Validate();
-        return new ListXMLiquidationsRequest(_entityId!)
+        return new ListCrossMarginLiquidationsRequest(_entityId!)
         {
           Status = _status,
           StartTime = _startTime,
