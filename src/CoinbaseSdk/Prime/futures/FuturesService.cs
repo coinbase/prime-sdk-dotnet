@@ -227,6 +227,64 @@ namespace CoinbaseSdk.Prime.Futures
     }
 
     /// <summary>
+    /// Get Portfolio Derivatives Currency Summary.
+    /// </summary>
+    public GetDerivativesCurrencySummaryResponse GetDerivativesCurrencySummary(
+      GetDerivativesCurrencySummaryRequest request,
+      CallOptions? options = null)
+    {
+      return Request<GetDerivativesCurrencySummaryResponse>(
+        HttpMethod.Get,
+        $"/portfolios/{request.PortfolioId}/derivatives/currency_summary",
+        [HttpStatusCode.OK],
+        null,
+        options);
+    }
+
+    public Task<GetDerivativesCurrencySummaryResponse> GetDerivativesCurrencySummaryAsync(
+      GetDerivativesCurrencySummaryRequest request,
+      CallOptions? options = null,
+      CancellationToken cancellationToken = default)
+    {
+      return RequestAsync<GetDerivativesCurrencySummaryResponse>(
+        HttpMethod.Get,
+        $"/portfolios/{request.PortfolioId}/derivatives/currency_summary",
+        [HttpStatusCode.OK],
+        null,
+        options,
+        cancellationToken);
+    }
+
+    /// <summary>
+    /// List Portfolio Derivative Positions.
+    /// </summary>
+    public ListDerivativePositionsResponse ListDerivativePositions(
+      ListDerivativePositionsRequest request,
+      CallOptions? options = null)
+    {
+      return Request<ListDerivativePositionsResponse>(
+        HttpMethod.Get,
+        $"/portfolios/{request.PortfolioId}/derivatives/positions",
+        [HttpStatusCode.OK],
+        request,
+        options);
+    }
+
+    public Task<ListDerivativePositionsResponse> ListDerivativePositionsAsync(
+      ListDerivativePositionsRequest request,
+      CallOptions? options = null,
+      CancellationToken cancellationToken = default)
+    {
+      return RequestAsync<ListDerivativePositionsResponse>(
+        HttpMethod.Get,
+        $"/portfolios/{request.PortfolioId}/derivatives/positions",
+        [HttpStatusCode.OK],
+        request,
+        options,
+        cancellationToken);
+    }
+
+    /// <summary>
     /// Set Auto Sweep.
     /// </summary>
     public SetAutoSweepResponse SetAutoSweep(

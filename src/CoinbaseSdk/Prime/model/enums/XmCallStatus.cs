@@ -35,7 +35,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<XmCallStatus>))]
   public enum XmCallStatus
   {
-    XM_CALL_STATUS_UNSPECIFIED,
     /// <summary>
     /// Margin call is open and not expired.
     /// </summary>

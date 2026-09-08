@@ -29,7 +29,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<EstimateType>))]
   public enum EstimateType
   {
-    UNSPECIFIED,
     LIVE,
     INTERIM
   }

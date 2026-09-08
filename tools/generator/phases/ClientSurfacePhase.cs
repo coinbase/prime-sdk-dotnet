@@ -262,16 +262,9 @@ public sealed class ClientSurfacePhase
 
   private static HashSet<string> LoadEnumTypeNames(string primeSrcRoot)
   {
-    var dir = Path.Combine(primeSrcRoot, "model", "enums");
-    if (!Directory.Exists(dir))
-    {
-      return new HashSet<string>(StringComparer.Ordinal);
-    }
-
-    return Directory.GetFiles(dir, "*.cs")
-      .Select(f => Path.GetFileNameWithoutExtension(f))
-      .Where(s => !string.IsNullOrEmpty(s))
-      .Select(s => s!)
-      .ToHashSet(StringComparer.Ordinal);
+    var names = new HashSet<string>(StringComparer.Ordinal);
+    ModelPostProcessor.AddEnumTypeNamesFromDirectory(names, Path.Combine(primeSrcRoot, "model", "enums"));
+    ModelPostProcessor.AddEnumTypeNamesFromDirectory(names, Path.Combine(primeSrcRoot, "model", "errors"));
+    return names;
   }
 }

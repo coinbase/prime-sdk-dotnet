@@ -36,10 +36,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   public enum FcmTradingSessionClosedReason
   {
     /// <summary>
-    /// Undefined closed reason.
-    /// </summary>
-    FCM_TRADING_SESSION_CLOSED_REASON_UNDEFINED,
-    /// <summary>
     /// Regular market close.
     /// </summary>
     FCM_TRADING_SESSION_CLOSED_REASON_REGULAR_MARKET_CLOSE,

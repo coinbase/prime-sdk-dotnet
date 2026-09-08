@@ -64,6 +64,7 @@ namespace CoinbaseSdk.Prime.Model.Enums
   /// - ONCHAIN_TRANSACTION: On-chain transaction initiated with Prime Onchain Wallet.
   /// - PORTFOLIO_STAKE: Portfolio-level staking operation.
   /// - PORTFOLIO_UNSTAKE: Portfolio-level unstaking operation.
+  /// - MERGE_STAKE: On-chain transaction consolidating funds from different addresses belonging to the same wallet.
   /// </summary>
   [JsonConverter(typeof(JsonStringEnumConverter<TransactionType>))]
   public enum TransactionType
@@ -207,6 +208,10 @@ namespace CoinbaseSdk.Prime.Model.Enums
     /// <summary>
     /// Portfolio-level unstaking operation.
     /// </summary>
-    PORTFOLIO_UNSTAKE
+    PORTFOLIO_UNSTAKE,
+    /// <summary>
+    /// On-chain transaction consolidating funds from different addresses belonging to the same wallet.
+    /// </summary>
+    MERGE_STAKE
   }
 }

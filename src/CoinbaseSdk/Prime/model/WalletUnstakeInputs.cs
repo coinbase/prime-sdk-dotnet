@@ -39,12 +39,17 @@ namespace CoinbaseSdk.Prime.Model
     /// (Alpha) Optional validator-level allocations for ETH V2 unstaking. Allows specifying which validators to unstake from and how much. This feature is in alpha. Please reach out to your Coinbase Prime account manager for more information
     /// </summary>
     public List<ValidatorAllocation>? ValidatorAllocations { get; set; }
+    /// <summary>
+    /// Optional validator address to unstake from. Only supported for a subset of protocols.
+    /// </summary>
+    public string? ValidatorAddress { get; set; }
     public WalletUnstakeInputs() { }
 
     public WalletUnstakeInputs(Builder builder)
     {
       this.Amount = builder.amount;
       this.ValidatorAllocations = builder.validatorAllocations;
+      this.ValidatorAddress = builder.validatorAddress;
     }
 
     public class Builder
@@ -52,6 +57,7 @@ namespace CoinbaseSdk.Prime.Model
 #pragma warning disable SA1307, SA1401
       internal string? amount;
       internal List<ValidatorAllocation>? validatorAllocations;
+      internal string? validatorAddress;
 #pragma warning restore SA1307, SA1401
       public Builder WithAmount(string? amount)
       {
@@ -61,6 +67,11 @@ namespace CoinbaseSdk.Prime.Model
       public Builder WithValidatorAllocations(List<ValidatorAllocation>? validatorAllocations)
       {
         this.validatorAllocations = validatorAllocations;
+        return this;
+      }
+      public Builder WithValidatorAddress(string? validatorAddress)
+      {
+        this.validatorAddress = validatorAddress;
         return this;
       }
       public WalletUnstakeInputs Build()

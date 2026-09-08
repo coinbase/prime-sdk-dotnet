@@ -29,7 +29,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<FcmPositionSide>))]
   public enum FcmPositionSide
   {
-    FCM_POSITION_SIDE_UNSPECIFIED,
     LONG,
     SHORT
   }

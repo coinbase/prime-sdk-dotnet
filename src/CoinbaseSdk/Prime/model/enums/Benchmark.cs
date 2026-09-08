@@ -29,7 +29,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<Benchmark>))]
   public enum Benchmark
   {
-    BENCHMARK_UNSET,
     ZERO,
     SOFR_360,
     SOFR_365,

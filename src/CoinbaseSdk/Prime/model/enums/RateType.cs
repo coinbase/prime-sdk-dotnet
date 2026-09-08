@@ -29,7 +29,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<RateType>))]
   public enum RateType
   {
-    RATE_TYPE_UNSET,
     BPS,
     APR_360,
     APR_365,

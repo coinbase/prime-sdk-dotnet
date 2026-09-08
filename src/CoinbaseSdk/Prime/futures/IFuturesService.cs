@@ -105,6 +105,30 @@ namespace CoinbaseSdk.Prime.Futures
       CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Get Portfolio Derivatives Currency Summary.
+    /// </summary>
+    public GetDerivativesCurrencySummaryResponse GetDerivativesCurrencySummary(
+      GetDerivativesCurrencySummaryRequest request,
+      CallOptions? options = null);
+
+    public Task<GetDerivativesCurrencySummaryResponse> GetDerivativesCurrencySummaryAsync(
+      GetDerivativesCurrencySummaryRequest request,
+      CallOptions? options = null,
+      CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// List Portfolio Derivative Positions.
+    /// </summary>
+    public ListDerivativePositionsResponse ListDerivativePositions(
+      ListDerivativePositionsRequest request,
+      CallOptions? options = null);
+
+    public Task<ListDerivativePositionsResponse> ListDerivativePositionsAsync(
+      ListDerivativePositionsRequest request,
+      CallOptions? options = null,
+      CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Set Auto Sweep.
     /// </summary>
     public SetAutoSweepResponse SetAutoSweep(

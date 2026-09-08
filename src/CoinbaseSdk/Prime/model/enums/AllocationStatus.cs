@@ -29,7 +29,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<AllocationStatus>))]
   public enum AllocationStatus
   {
-    ALLOCATION_STATUS_UNSPECIFIED,
     ALLOCATION_STATUS_ALLOCATION_PENDING,
     ALLOCATION_STATUS_ALLOCATION_ACCEPTED,
     ALLOCATION_STATUS_ALLOCATION_ALLOCATED,

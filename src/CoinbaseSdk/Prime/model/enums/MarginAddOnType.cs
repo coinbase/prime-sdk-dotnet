@@ -29,7 +29,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<MarginAddOnType>))]
   public enum MarginAddOnType
   {
-    MARGIN_ADD_ON_TYPE_UNSPECIFIED,
     SINGLE_COIN_STRESS,
     CONCENTRATION_STRESS,
     MACRO_STRESS,

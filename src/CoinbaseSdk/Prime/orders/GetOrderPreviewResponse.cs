@@ -67,6 +67,8 @@ namespace CoinbaseSdk.Prime.Orders
 
     public string? DisplayBaseSize { get; set; }
 
+    public bool? IsBuyExact { get; set; }
+
     public GetOrderPreviewResponse() { }
   }
 }

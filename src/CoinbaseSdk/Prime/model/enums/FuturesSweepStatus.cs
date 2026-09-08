@@ -29,7 +29,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<FuturesSweepStatus>))]
   public enum FuturesSweepStatus
   {
-    FCM_FUTURES_SWEEP_STATUS_UNSPECIFIED,
     FCM_FUTURES_SWEEP_STATUS_PENDING,
     FCM_FUTURES_SWEEP_STATUS_CLOSED,
     FCM_FUTURES_SWEEP_STATUS_CANCELED,

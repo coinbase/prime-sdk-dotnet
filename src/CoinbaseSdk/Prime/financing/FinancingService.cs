@@ -24,6 +24,33 @@ namespace CoinbaseSdk.Prime.Financing
   public class FinancingService(ICoinbaseClient client) : CoinbaseService(client), IFinancingService
   {
     /// <summary>
+    /// Get Conversion Fees.
+    /// </summary>
+    public GetConversionFeesResponse GetConversionFees(
+      CallOptions? options = null)
+    {
+      return Request<GetConversionFeesResponse>(
+        HttpMethod.Get,
+        $"/conversion/fees",
+        [HttpStatusCode.OK],
+        null,
+        options);
+    }
+
+    public Task<GetConversionFeesResponse> GetConversionFeesAsync(
+      CallOptions? options = null,
+      CancellationToken cancellationToken = default)
+    {
+      return RequestAsync<GetConversionFeesResponse>(
+        HttpMethod.Get,
+        $"/conversion/fees",
+        [HttpStatusCode.OK],
+        null,
+        options,
+        cancellationToken);
+    }
+
+    /// <summary>
     /// List Financing Eligible Assets.
     /// </summary>
     public ListFinancingEligibleAssetsResponse ListFinancingEligibleAssets(
@@ -457,6 +484,64 @@ namespace CoinbaseSdk.Prime.Financing
     }
 
     /// <summary>
+    /// Get Cross Margin Liquidation.
+    /// </summary>
+    public GetXMLiquidationResponse GetXMLiquidation(
+      GetXMLiquidationRequest request,
+      CallOptions? options = null)
+    {
+      return Request<GetXMLiquidationResponse>(
+        HttpMethod.Get,
+        $"/entities/{request.EntityId}/cross_margin/liquidation",
+        [HttpStatusCode.OK],
+        request,
+        options);
+    }
+
+    public Task<GetXMLiquidationResponse> GetXMLiquidationAsync(
+      GetXMLiquidationRequest request,
+      CallOptions? options = null,
+      CancellationToken cancellationToken = default)
+    {
+      return RequestAsync<GetXMLiquidationResponse>(
+        HttpMethod.Get,
+        $"/entities/{request.EntityId}/cross_margin/liquidation",
+        [HttpStatusCode.OK],
+        request,
+        options,
+        cancellationToken);
+    }
+
+    /// <summary>
+    /// List Cross Margin Liquidations.
+    /// </summary>
+    public ListXMLiquidationsResponse ListXMLiquidations(
+      ListXMLiquidationsRequest request,
+      CallOptions? options = null)
+    {
+      return Request<ListXMLiquidationsResponse>(
+        HttpMethod.Get,
+        $"/entities/{request.EntityId}/cross_margin/liquidations",
+        [HttpStatusCode.OK],
+        request,
+        options);
+    }
+
+    public Task<ListXMLiquidationsResponse> ListXMLiquidationsAsync(
+      ListXMLiquidationsRequest request,
+      CallOptions? options = null,
+      CancellationToken cancellationToken = default)
+    {
+      return RequestAsync<ListXMLiquidationsResponse>(
+        HttpMethod.Get,
+        $"/entities/{request.EntityId}/cross_margin/liquidations",
+        [HttpStatusCode.OK],
+        request,
+        options,
+        cancellationToken);
+    }
+
+    /// <summary>
     /// Get Cross Margin Risk Parameters.
     /// </summary>
     public GetCrossMarginRiskParametersResponse GetCrossMarginRiskParameters(
@@ -479,6 +564,64 @@ namespace CoinbaseSdk.Prime.Financing
       return RequestAsync<GetCrossMarginRiskParametersResponse>(
         HttpMethod.Get,
         $"/entities/{request.EntityId}/cross_margin/risk_parameters",
+        [HttpStatusCode.OK],
+        null,
+        options,
+        cancellationToken);
+    }
+
+    /// <summary>
+    /// Get Entity Rewards Rate (Beta).
+    /// </summary>
+    public PrimeBeta_GetEntityRewardsRateResponse PrimeBeta_GetEntityRewardsRate(
+      PrimeBeta_GetEntityRewardsRateRequest request,
+      CallOptions? options = null)
+    {
+      return Request<PrimeBeta_GetEntityRewardsRateResponse>(
+        HttpMethod.Get,
+        $"/entities/{request.EntityId}/rewards/rate",
+        [HttpStatusCode.OK],
+        null,
+        options);
+    }
+
+    public Task<PrimeBeta_GetEntityRewardsRateResponse> PrimeBeta_GetEntityRewardsRateAsync(
+      PrimeBeta_GetEntityRewardsRateRequest request,
+      CallOptions? options = null,
+      CancellationToken cancellationToken = default)
+    {
+      return RequestAsync<PrimeBeta_GetEntityRewardsRateResponse>(
+        HttpMethod.Get,
+        $"/entities/{request.EntityId}/rewards/rate",
+        [HttpStatusCode.OK],
+        null,
+        options,
+        cancellationToken);
+    }
+
+    /// <summary>
+    /// Get Portfolio Rewards Rate (Beta).
+    /// </summary>
+    public PrimeBeta_GetPortfolioRewardsRateResponse PrimeBeta_GetPortfolioRewardsRate(
+      PrimeBeta_GetPortfolioRewardsRateRequest request,
+      CallOptions? options = null)
+    {
+      return Request<PrimeBeta_GetPortfolioRewardsRateResponse>(
+        HttpMethod.Get,
+        $"/portfolios/{request.PortfolioId}/rewards/rate",
+        [HttpStatusCode.OK],
+        null,
+        options);
+    }
+
+    public Task<PrimeBeta_GetPortfolioRewardsRateResponse> PrimeBeta_GetPortfolioRewardsRateAsync(
+      PrimeBeta_GetPortfolioRewardsRateRequest request,
+      CallOptions? options = null,
+      CancellationToken cancellationToken = default)
+    {
+      return RequestAsync<PrimeBeta_GetPortfolioRewardsRateResponse>(
+        HttpMethod.Get,
+        $"/portfolios/{request.PortfolioId}/rewards/rate",
         [HttpStatusCode.OK],
         null,
         options,

@@ -29,7 +29,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<LoanType>))]
   public enum LoanType
   {
-    LOAN_TYPE_UNSET,
     BILATERAL_LENDING,
     TRADE_FINANCE,
     PORTFOLIO_MARGIN,

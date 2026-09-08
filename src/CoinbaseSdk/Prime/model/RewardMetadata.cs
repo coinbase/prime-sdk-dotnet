@@ -44,23 +44,36 @@ namespace CoinbaseSdk.Prime.Model
     /// i.e. coinbase pays rebates for staking fees to eligible delegators.
     /// - BUIDL_DIVIDEND: A BUIDL dividend reward.
     /// i.e. dividends from BUIDL fund holdings.
+    /// - CUSTOM_STABLECOIN_REWARD: A custom stablecoin reward.
+    /// i.e. USDC reward payouts.
     /// </summary>
     public RewardSubtype? Subtype { get; set; }
+    /// <summary>
+    /// Details for a custom stablecoin reward payout transaction.
+    /// </summary>
+    public CustomStablecoinRewardDetails? CustomStablecoinRewardDetails { get; set; }
     public RewardMetadata() { }
 
     public RewardMetadata(Builder builder)
     {
       this.Subtype = builder.subtype;
+      this.CustomStablecoinRewardDetails = builder.customStablecoinRewardDetails;
     }
 
     public class Builder
     {
 #pragma warning disable SA1307, SA1401
       internal RewardSubtype? subtype;
+      internal CustomStablecoinRewardDetails? customStablecoinRewardDetails;
 #pragma warning restore SA1307, SA1401
       public Builder WithSubtype(RewardSubtype? subtype)
       {
         this.subtype = subtype;
+        return this;
+      }
+      public Builder WithCustomStablecoinRewardDetails(CustomStablecoinRewardDetails? customStablecoinRewardDetails)
+      {
+        this.customStablecoinRewardDetails = customStablecoinRewardDetails;
         return this;
       }
       public RewardMetadata Build()

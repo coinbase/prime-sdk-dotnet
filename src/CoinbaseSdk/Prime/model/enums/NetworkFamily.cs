@@ -29,7 +29,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<NetworkFamily>))]
   public enum NetworkFamily
   {
-    NETWORK_FAMILY_UNSPECIFIED,
     NETWORK_FAMILY_EVM,
     NETWORK_FAMILY_SOLANA
   }

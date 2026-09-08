@@ -35,10 +35,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   public enum ContractExpiryType
   {
     /// <summary>
-    /// Unspecified contract expiry type.
-    /// </summary>
-    CONTRACT_EXPIRY_TYPE_UNSPECIFIED,
-    /// <summary>
     /// Expiring futures contract.
     /// </summary>
     CONTRACT_EXPIRY_TYPE_EXPIRING,

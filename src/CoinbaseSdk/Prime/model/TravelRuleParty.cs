@@ -81,6 +81,10 @@ namespace CoinbaseSdk.Prime.Model
     /// Account identifier for travel rule compliance. If not provided, defaults to portfolio ID.
     /// </summary>
     public string? AccountId { get; set; }
+    /// <summary>
+    /// Detailed address information.
+    /// </summary>
+    public DetailedAddress? VaspAddress { get; set; }
     public TravelRuleParty() { }
 
     public TravelRuleParty(Builder builder)
@@ -95,6 +99,7 @@ namespace CoinbaseSdk.Prime.Model
       this.DateOfBirth = builder.dateOfBirth;
       this.TelephoneNumber = builder.telephoneNumber;
       this.AccountId = builder.accountId;
+      this.VaspAddress = builder.vaspAddress;
     }
 
     public class Builder
@@ -110,6 +115,7 @@ namespace CoinbaseSdk.Prime.Model
       internal DateOfBirth? dateOfBirth;
       internal string? telephoneNumber;
       internal string? accountId;
+      internal DetailedAddress? vaspAddress;
 #pragma warning restore SA1307, SA1401
       public Builder WithName(string? name)
       {
@@ -159,6 +165,11 @@ namespace CoinbaseSdk.Prime.Model
       public Builder WithAccountId(string? accountId)
       {
         this.accountId = accountId;
+        return this;
+      }
+      public Builder WithVaspAddress(DetailedAddress? vaspAddress)
+      {
+        this.vaspAddress = vaspAddress;
         return this;
       }
       public TravelRuleParty Build()

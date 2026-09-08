@@ -66,6 +66,8 @@ namespace CoinbaseSdk.Prime.Orders
 
     public string? WigLevel { get; set; }
 
+    public bool? IsBuyExact { get; set; }
+
     public class GetOrderPreviewRequestBuilder
     {
       private string? _portfolioId;
@@ -88,6 +90,7 @@ namespace CoinbaseSdk.Prime.Orders
       private PegOffsetType? _pegOffsetType;
       private string? _offset;
       private string? _wigLevel;
+      private bool? _isBuyExact;
 
       public GetOrderPreviewRequestBuilder WithPortfolioId(string portfolioId)
       {
@@ -209,6 +212,12 @@ namespace CoinbaseSdk.Prime.Orders
         return this;
       }
 
+      public GetOrderPreviewRequestBuilder WithIsBuyExact(bool? isBuyExact)
+      {
+        _isBuyExact = isBuyExact;
+        return this;
+      }
+
       private void Validate()
       {
         if (string.IsNullOrWhiteSpace(_portfolioId))
@@ -241,6 +250,7 @@ namespace CoinbaseSdk.Prime.Orders
           PegOffsetType = _pegOffsetType,
           Offset = _offset,
           WigLevel = _wigLevel,
+          IsBuyExact = _isBuyExact,
         };
       }
     }

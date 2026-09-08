@@ -29,7 +29,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<StakeType>))]
   public enum StakeType
   {
-    STAKE_TYPE_UNSPECIFIED,
     STAKE_TYPE_INITIAL_DEPOSIT,
     STAKE_TYPE_TOP_UP
   }

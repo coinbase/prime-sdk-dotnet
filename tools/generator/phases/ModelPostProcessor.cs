@@ -28,6 +28,7 @@ public class ModelPostProcessor
   private readonly string _outputDir;
   private readonly string _commonDir;
   private readonly string _enumsDir;
+  private readonly string _errorsDir;
   private readonly IReadOnlyDictionary<string, string> _commonModels;
   private readonly string _specPath;
   private readonly GeneratorConfiguration _configuration;
@@ -41,6 +42,7 @@ public class ModelPostProcessor
     string outputDir,
     string commonDir,
     string enumsDir,
+    string errorsDir,
     IReadOnlyDictionary<string, string> commonModels,
     string specPath,
     GeneratorConfiguration configuration)
@@ -51,6 +53,7 @@ public class ModelPostProcessor
     _outputDir = outputDir;
     _commonDir = commonDir;
     _enumsDir = enumsDir;
+    _errorsDir = errorsDir;
     _commonModels = commonModels;
     _specPath = specPath;
     _configuration = configuration;
@@ -71,6 +74,7 @@ public class ModelPostProcessor
 
     Directory.CreateDirectory(_outputDir);
     Directory.CreateDirectory(_enumsDir);
+    Directory.CreateDirectory(_errorsDir);
 
     var enumFiles = new List<string>();
     var classFiles = new List<string>();
@@ -238,11 +242,21 @@ public class ModelPostProcessor
 
     className = ExtractClassName(content);
     var fileName = $"{className}.cs";
-    var outputPath = Path.Combine(_enumsDir, fileName);
+    var outputDirectory = GeneratedEnumKind.OutputDirectory(className, _enumsDir, _errorsDir);
+    if (GeneratedEnumKind.IsSubcode(className))
+    {
+      content = content.Replace(
+        $"namespace {GeneratedEnumKind.EnumsNamespace}",
+        $"namespace {GeneratedEnumKind.ErrorsNamespace}",
+        StringComparison.Ordinal);
+    }
+
+    var outputPath = Path.Combine(outputDirectory, fileName);
     var existsBefore = File.Exists(outputPath);
 
-    HandleCaseVariants(_enumsDir, fileName);
-    RemoveStaleFile(_enumsDir, originalFileName, fileName, className, isEnum: true);
+    HandleCaseVariants(outputDirectory, fileName);
+    RemoveStaleFile(outputDirectory, originalFileName, fileName, className, isEnum: true);
+    DeleteSiblingEnumCopy(outputDirectory, fileName);
 
     content = JsonNameCodegen.PostProcessEmittedSource(content);
     content = EnumXmlDocEnhancer.Apply(content, className, docIndex);
@@ -306,14 +320,7 @@ public class ModelPostProcessor
     HandleCaseVariants(outputDirectory, fileName);
     RemoveStaleFile(outputDirectory, originalFileName, fileName, className, isEnum: false);
 
-    var actualEnumNames = new HashSet<string>();
-    if (Directory.Exists(_enumsDir))
-    {
-      foreach (var f in Directory.GetFiles(_enumsDir, "*.cs"))
-      {
-        actualEnumNames.Add(Path.GetFileNameWithoutExtension(f));
-      }
-    }
+    var actualEnumNames = CollectEmittedEnumTypeNames();
 
     content = _transforms.ApplyEnumMappings(content, actualEnumNames);
     content = JsonNameCodegen.PostProcessEmittedSource(content);
@@ -329,6 +336,42 @@ public class ModelPostProcessor
     else
     {
       _updatedModelsCount++;
+    }
+  }
+
+  private HashSet<string> CollectEmittedEnumTypeNames()
+  {
+    var names = new HashSet<string>(StringComparer.Ordinal);
+    AddEnumTypeNamesFromDirectory(names, _enumsDir);
+    AddEnumTypeNamesFromDirectory(names, _errorsDir);
+    return names;
+  }
+
+  internal static void AddEnumTypeNamesFromDirectory(ISet<string> names, string directory)
+  {
+    if (!Directory.Exists(directory))
+    {
+      return;
+    }
+
+    foreach (var f in Directory.GetFiles(directory, "*.cs"))
+    {
+      var name = Path.GetFileNameWithoutExtension(f);
+      if (!string.IsNullOrEmpty(name))
+      {
+        names.Add(name);
+      }
+    }
+  }
+
+  private void DeleteSiblingEnumCopy(string outputDirectory, string fileName)
+  {
+    var sibling = outputDirectory == _errorsDir ? _enumsDir : _errorsDir;
+    var stalePath = Path.Combine(sibling, fileName);
+    if (File.Exists(stalePath))
+    {
+      File.Delete(stalePath);
+      _logger.LogInformation("Deleted stale enum file after folder move: {Path}", stalePath);
     }
   }
 

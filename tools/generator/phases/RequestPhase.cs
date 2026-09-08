@@ -36,6 +36,52 @@ public static class RequestPhase
     return false;
   }
 
+  private static List<string> CollectEnumClrTypes(
+    ParsedOpenApiDocument doc,
+    SharedTransforms transforms,
+    SdkOperationBinding b,
+    IReadOnlySet<string> knownEnumTypeNames,
+    List<ParsedParameter> pathParams,
+    List<ParsedParameter> queryParamsForMembers,
+    List<SchemaProperty> bodyProps)
+  {
+    var types = new List<string>();
+    if (knownEnumTypeNames.Count > 0)
+    {
+      foreach (var clr in b.ParamTypeOverrides.Values)
+      {
+        if (!string.IsNullOrWhiteSpace(clr) && EnumClrReferencesKnownName(clr, knownEnumTypeNames))
+        {
+          types.Add(clr);
+        }
+      }
+    }
+
+    foreach (var p in pathParams.Concat(queryParamsForMembers))
+    {
+      if (p.Schema == null)
+      {
+        continue;
+      }
+
+      var clr = OpenApiSchemaCodegen.ToClrType(doc.Root, p.Schema, transforms, out _, out var isEnum);
+      if (isEnum)
+      {
+        types.Add(clr);
+      }
+    }
+
+    foreach (var p in bodyProps)
+    {
+      if (p.UsesEnum)
+      {
+        types.Add(p.ClrType);
+      }
+    }
+
+    return types;
+  }
+
   public static string EmitRequest(
     ParsedOpenApiDocument doc,
     GeneratorConfiguration cfg,
@@ -114,24 +160,31 @@ public static class RequestPhase
       sb.AppendLine("  using CoinbaseSdk.Prime.Common;");
     }
 
-    // Always include Model.Enums when paginated (SortDirection is in that namespace)
-    var overrideUsesEnums = knownEnumTypeNames.Count > 0 &&
-                            b.ParamTypeOverrides.Values.Any(clr =>
-                              EnumClrReferencesKnownName(clr, knownEnumTypeNames));
-    var usesEnums = paginated ||
-                   overrideUsesEnums ||
-                   pathParams.Concat(queryParamsForMembers).Any(p => p.Schema != null &&
-                     OpenApiSchemaCodegen.ToClrType(doc.Root, p.Schema, transforms, out _, out var isEnum) is not null && isEnum) ||
-                   bodyProps.Any(p => p.UsesEnum);
+    var enumClrTypes = CollectEnumClrTypes(
+      doc,
+      transforms,
+      b,
+      knownEnumTypeNames,
+      pathParams,
+      queryParamsForMembers,
+      bodyProps);
+    var usesDomainEnums = paginated ||
+                          enumClrTypes.Any(clr => !GeneratedEnumKind.IsSubcodeClr(clr));
+    var usesErrorEnums = enumClrTypes.Any(GeneratedEnumKind.IsSubcodeClr);
     var usesModel = bodyProps.Any(p => p.UsesModel);
     if (usesModel)
     {
       sb.AppendLine("  using CoinbaseSdk.Prime.Model;");
     }
 
-    if (usesEnums)
+    if (usesDomainEnums)
     {
-      sb.AppendLine("  using CoinbaseSdk.Prime.Model.Enums;");
+      sb.AppendLine($"  {GeneratedEnumKind.EnumsUsing}");
+    }
+
+    if (usesErrorEnums)
+    {
+      sb.AppendLine($"  {GeneratedEnumKind.ErrorsUsing}");
     }
 
     sb.AppendLine();

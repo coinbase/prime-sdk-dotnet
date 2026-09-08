@@ -30,6 +30,7 @@ namespace CoinbaseSdk.Prime.Model.Enums
   /// - UNKNOWN_PRODUCT_TYPE: Unknown product type.
   /// - SPOT: Spot product.
   /// - FUTURE: Future product.
+  /// - OPTION: Option product.
   /// </summary>
   [JsonConverter(typeof(JsonStringEnumConverter<ProductType>))]
   public enum ProductType
@@ -41,6 +42,10 @@ namespace CoinbaseSdk.Prime.Model.Enums
     /// <summary>
     /// Future product.
     /// </summary>
-    FUTURE
+    FUTURE,
+    /// <summary>
+    /// Option product.
+    /// </summary>
+    OPTION
   }
 }

@@ -29,7 +29,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<FcmMarginCallType>))]
   public enum FcmMarginCallType
   {
-    FCM_MARGIN_CALL_TYPE_UNSPECIFIED,
     FCM_MARGIN_CALL_TYPE_URGENT,
     FCM_MARGIN_CALL_TYPE_REGULAR
   }

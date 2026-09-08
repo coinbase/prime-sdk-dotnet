@@ -343,7 +343,7 @@ namespace CoinbaseSdk.Prime.Orders
     }
 
     /// <summary>
-    /// Edit Order (Beta).
+    /// Edit Order.
     /// </summary>
     public EditOrderResponse EditOrder(
       EditOrderRequest request,
