@@ -7,6 +7,7 @@
 - **`CoinbasePrimeException`** (and HTTP status subclasses such as **`PrimeBadRequestException`**, **`PrimeNotFoundException`**) expose API **`code`**, **`subcode`**, and **`trace_id`** from error bodies.
 - Status-level **`\*ErrorCode`** enums now live under `src/CoinbaseSdk/Prime/model/errors` (`CoinbaseSdk.Prime.Model.Errors`) alongside Subcode enums.
 - Example: `src/CoinbaseSdk/PrimeExample/examples/errors/HandleApiErrors.cs`
+- **`EncryptedCredentialsDecoder`**: decrypts `RotateAPIKeyResponse.EncryptedCredentials` with HKDF-SHA256 + AES-256-GCM using the current signing key (BCL only).
 
 ### Changed
 

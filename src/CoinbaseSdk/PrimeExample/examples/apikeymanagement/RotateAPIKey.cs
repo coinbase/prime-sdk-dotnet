@@ -48,6 +48,14 @@ rootCommand.SetHandler(() =>
 
         PrettyPrinter.PrintResponse("RotateAPIKeyResponse", response);
 
+        var signingKey = Environment.GetEnvironmentVariable("PRIME_SIGNING_KEY");
+        if (!string.IsNullOrEmpty(response.EncryptedCredentials) &&
+            !string.IsNullOrEmpty(signingKey))
+        {
+            var creds = EncryptedCredentialsDecoder.Decode(response, signingKey);
+            Console.WriteLine($"Decoded new AccessKey: {creds.AccessKey}");
+        }
+
         Environment.ExitCode = 0;
     }
     catch (Exception ex)
