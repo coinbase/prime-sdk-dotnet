@@ -22,13 +22,13 @@
  */
 
 
-namespace CoinbaseSdk.Prime.Model.Enums
+namespace CoinbaseSdk.Prime.Model.Errors
 {
   using System.Text.Json.Serialization;
 
-  [JsonConverter(typeof(JsonStringEnumConverter<InternalServerErrorCode>))]
-  public enum InternalServerErrorCode
+  [JsonConverter(typeof(JsonStringEnumConverter<UnauthorizedErrorCode>))]
+  public enum UnauthorizedErrorCode
   {
-    INTERNAL_ERROR
+    AUTHENTICATION_FAILED
   }
 }

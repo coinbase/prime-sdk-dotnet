@@ -22,15 +22,13 @@
  */
 
 
-namespace CoinbaseSdk.Prime.Model.Enums
+namespace CoinbaseSdk.Prime.Model.Errors
 {
   using System.Text.Json.Serialization;
 
-  [JsonConverter(typeof(JsonStringEnumConverter<BadRequestErrorCode>))]
-  public enum BadRequestErrorCode
+  [JsonConverter(typeof(JsonStringEnumConverter<TooManyRequestsErrorCode>))]
+  public enum TooManyRequestsErrorCode
   {
-    VALIDATION_ERROR,
-    REQUIRED_FIELD_MISSING,
-    FAILED_PRECONDITION
+    RATE_LIMIT_EXCEEDED
   }
 }

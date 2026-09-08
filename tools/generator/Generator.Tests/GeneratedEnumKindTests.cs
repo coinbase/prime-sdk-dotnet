@@ -44,7 +44,17 @@ public class GeneratedEnumKindTests
   public void OutputDirectory_RoutesSubcodesToErrors()
   {
     Assert.Equal("errors", GeneratedEnumKind.OutputDirectory("TooManyRequestsSubcode", "enums", "errors"));
+    Assert.Equal("errors", GeneratedEnumKind.OutputDirectory("BadRequestErrorCode", "enums", "errors"));
     Assert.Equal("enums", GeneratedEnumKind.OutputDirectory("WalletType", "enums", "errors"));
+  }
+
+  [Theory]
+  [InlineData("BadRequestErrorCode", true)]
+  [InlineData("CreateOrderForbiddenSubcode", true)]
+  [InlineData("OrderSide", false)]
+  public void IsErrorEnum_DetectsErrorCodesAndSubcodes(string typeName, bool expected)
+  {
+    Assert.Equal(expected, GeneratedEnumKind.IsErrorEnum(typeName));
   }
 
   [Fact]
@@ -55,6 +65,19 @@ public class GeneratedEnumKindTests
       "namespace CoinbaseSdk.Prime.Model\n{\n  using System.Text.Json.Serialization;\n\n  public class ErrorBody { public CreateOrderForbiddenSubcode Subcode { get; set; } }\n}\n";
 
     var result = transforms.ApplyEnumMappings(content, new HashSet<string> { "CreateOrderForbiddenSubcode", "OrderSide" });
+
+    Assert.Contains(GeneratedEnumKind.ErrorsUsing, result, StringComparison.Ordinal);
+    Assert.DoesNotContain(GeneratedEnumKind.EnumsUsing, result, StringComparison.Ordinal);
+  }
+
+  [Fact]
+  public void ApplyEnumMappings_AddsErrorsUsingForErrorCodeReferences()
+  {
+    var transforms = new SharedTransforms(new GeneratorConfiguration());
+    var content =
+      "namespace CoinbaseSdk.Prime.Model\n{\n  using System.Text.Json.Serialization;\n\n  public class ErrorBody { public BadRequestErrorCode Code { get; set; } }\n}\n";
+
+    var result = transforms.ApplyEnumMappings(content, new HashSet<string> { "BadRequestErrorCode", "OrderSide" });
 
     Assert.Contains(GeneratedEnumKind.ErrorsUsing, result, StringComparison.Ordinal);
     Assert.DoesNotContain(GeneratedEnumKind.EnumsUsing, result, StringComparison.Ordinal);

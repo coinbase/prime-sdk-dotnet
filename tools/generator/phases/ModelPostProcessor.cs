@@ -243,7 +243,7 @@ public class ModelPostProcessor
     className = ExtractClassName(content);
     var fileName = $"{className}.cs";
     var outputDirectory = GeneratedEnumKind.OutputDirectory(className, _enumsDir, _errorsDir);
-    if (GeneratedEnumKind.IsSubcode(className))
+    if (GeneratedEnumKind.IsErrorEnum(className))
     {
       content = content.Replace(
         $"namespace {GeneratedEnumKind.EnumsNamespace}",

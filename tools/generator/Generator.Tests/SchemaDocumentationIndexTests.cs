@@ -90,4 +90,50 @@ public class SchemaDocumentationIndexTests
       cfg.EnumNameMappings);
     Assert.Equal("PrimeActivityType", activityType);
   }
+
+  [Fact]
+  public async Task LoadAsync_LoadsErrorCatalogFromTags()
+  {
+    var yamlPath = Path.Combine(Path.GetTempPath(), $"schema-doc-catalog-{Guid.NewGuid():N}.yaml");
+    const string yaml = """
+      openapi: 3.0.0
+      tags:
+      - name: Error Codes
+        x-error-codes:
+        - name: VALIDATION_ERROR
+          httpStatus: 400
+          description: One or more request fields are invalid.
+        x-subcodes:
+        - name: ORDER_SIZE_INVALID
+          errorCode: VALIDATION_ERROR
+          httpStatus: 400
+          description: The order size is invalid.
+      components:
+        schemas:
+          coinbase.public_rest_api.BadRequestErrorCode:
+            type: string
+            enum:
+            - VALIDATION_ERROR
+      """;
+
+    await File.WriteAllTextAsync(yamlPath, yaml);
+    try
+    {
+      var cfg = GeneratorConfiguration.Load(GeneratorPaths.FindProjectRoot());
+      var transforms = new SharedTransforms(cfg);
+      var index = await SchemaDocumentationIndex.LoadAsync(
+        yamlPath,
+        transforms,
+        new Dictionary<string, string>(),
+        new Dictionary<string, string>());
+
+      Assert.True(index.HasErrorCatalogDocs);
+      Assert.Equal("One or more request fields are invalid.", index.TryGetErrorCatalogDoc("VALIDATION_ERROR"));
+      Assert.Equal("The order size is invalid.", index.TryGetErrorCatalogDoc("ORDER_SIZE_INVALID"));
+    }
+    finally
+    {
+      File.Delete(yamlPath);
+    }
+  }
 }

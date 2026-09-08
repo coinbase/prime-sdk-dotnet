@@ -22,13 +22,13 @@
  */
 
 
-namespace CoinbaseSdk.Prime.Model.Enums
+namespace CoinbaseSdk.Prime.Model.Errors
 {
   using System.Text.Json.Serialization;
 
-  [JsonConverter(typeof(JsonStringEnumConverter<UnauthorizedErrorCode>))]
-  public enum UnauthorizedErrorCode
+  [JsonConverter(typeof(JsonStringEnumConverter<NotFoundErrorCode>))]
+  public enum NotFoundErrorCode
   {
-    AUTHENTICATION_FAILED
+    RESOURCE_NOT_FOUND
   }
 }

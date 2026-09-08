@@ -22,13 +22,13 @@
  */
 
 
-namespace CoinbaseSdk.Prime.Model.Enums
+namespace CoinbaseSdk.Prime.Model.Errors
 {
   using System.Text.Json.Serialization;
 
-  [JsonConverter(typeof(JsonStringEnumConverter<TooManyRequestsErrorCode>))]
-  public enum TooManyRequestsErrorCode
+  [JsonConverter(typeof(JsonStringEnumConverter<InternalServerErrorCode>))]
+  public enum InternalServerErrorCode
   {
-    RATE_LIMIT_EXCEEDED
+    INTERNAL_ERROR
   }
 }

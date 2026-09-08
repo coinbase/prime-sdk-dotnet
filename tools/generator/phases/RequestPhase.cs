@@ -169,8 +169,8 @@ public static class RequestPhase
       queryParamsForMembers,
       bodyProps);
     var usesDomainEnums = paginated ||
-                          enumClrTypes.Any(clr => !GeneratedEnumKind.IsSubcodeClr(clr));
-    var usesErrorEnums = enumClrTypes.Any(GeneratedEnumKind.IsSubcodeClr);
+                          enumClrTypes.Any(clr => !GeneratedEnumKind.IsErrorEnumClr(clr));
+    var usesErrorEnums = enumClrTypes.Any(GeneratedEnumKind.IsErrorEnumClr);
     var usesModel = bodyProps.Any(p => p.UsesModel);
     if (usesModel)
     {

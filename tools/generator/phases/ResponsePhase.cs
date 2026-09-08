@@ -54,8 +54,8 @@ public static class ResponsePhase
     var schema = SpecParser.ResolveRef(doc.Root, op.SuccessResponseSchemaRef);
     var props = OpenApiSchemaCodegen.ListProperties(doc.Root, schema, transforms);
     var useModel = props.Any(p => p.UsesModel);
-    var useDomainEnums = props.Any(p => p.UsesEnum && !GeneratedEnumKind.IsSubcodeClr(p.ClrType));
-    var useErrorEnums = props.Any(p => p.UsesEnum && GeneratedEnumKind.IsSubcodeClr(p.ClrType));
+    var useDomainEnums = props.Any(p => p.UsesEnum && !GeneratedEnumKind.IsErrorEnumClr(p.ClrType));
+    var useErrorEnums = props.Any(p => p.UsesEnum && GeneratedEnumKind.IsErrorEnumClr(p.ClrType));
     // Pagination is in CoinbaseSdk.Prime.Common, not Model
     var useCommon = props.Any(p =>
       string.Equals(p.ClrType, "Pagination", StringComparison.Ordinal) ||

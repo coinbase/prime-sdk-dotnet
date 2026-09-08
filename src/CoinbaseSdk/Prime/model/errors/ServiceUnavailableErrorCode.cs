@@ -22,13 +22,13 @@
  */
 
 
-namespace CoinbaseSdk.Prime.Model.Enums
+namespace CoinbaseSdk.Prime.Model.Errors
 {
   using System.Text.Json.Serialization;
 
-  [JsonConverter(typeof(JsonStringEnumConverter<ForbiddenErrorCode>))]
-  public enum ForbiddenErrorCode
+  [JsonConverter(typeof(JsonStringEnumConverter<ServiceUnavailableErrorCode>))]
+  public enum ServiceUnavailableErrorCode
   {
-    PERMISSION_DENIED
+    SERVICE_UNAVAILABLE
   }
 }

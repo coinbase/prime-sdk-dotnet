@@ -6,7 +6,7 @@ Holistic code generation for the Coinbase Prime .NET SDK from the [Prime OpenAPI
 
 Every run produces, together:
 
-1. **Models & enums** (`CoinbaseSdk.Prime.Model` / `Model.Enums`) via OpenAPI Generator CLI + post-processing (same pipeline as the former model-only tool). Error **Subcode** enums go under `model/errors` (`CoinbaseSdk.Prime.Model.Errors`).
+1. **Models & enums** (`CoinbaseSdk.Prime.Model` / `Model.Enums`) via OpenAPI Generator CLI + post-processing (same pipeline as the former model-only tool). Error **Subcode** and **ErrorCode** enums go under `model/errors` (`CoinbaseSdk.Prime.Model.Errors`).
 2. **Request / Response DTOs**, **service interfaces**, and **service implementations** under each feature folder (e.g. `orders/`, `wallets/`), driven by `SpecAnalyzer` (tag routing, services, optional schema-prefix discovery), `OperationBindingGenerator`, `config/operations-overrides.json`, and `config/generator-config.json`.
 
 There is no mode to generate only one category; output is always kept in sync.

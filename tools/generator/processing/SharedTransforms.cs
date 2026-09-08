@@ -186,10 +186,10 @@ public class SharedTransforms
     }
 
     var referencesDomainEnum = actualEnumNames.Any(enumName =>
-      !GeneratedEnumKind.IsSubcode(enumName) &&
+      !GeneratedEnumKind.IsErrorEnum(enumName) &&
       Regex.IsMatch(content, $@"\b{Regex.Escape(enumName)}\b"));
     var referencesErrorEnum = actualEnumNames.Any(enumName =>
-      GeneratedEnumKind.IsSubcode(enumName) &&
+      GeneratedEnumKind.IsErrorEnum(enumName) &&
       Regex.IsMatch(content, $@"\b{Regex.Escape(enumName)}\b"));
 
     if (referencesDomainEnum)

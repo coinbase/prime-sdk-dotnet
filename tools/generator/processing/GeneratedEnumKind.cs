@@ -17,7 +17,7 @@
 namespace CoinbaseSdk.Tools.Generator.Processing;
 
 /// <summary>
-/// Distinguishes domain enums (<c>model/enums</c>) from OpenAPI error Subcode enums (<c>model/errors</c>).
+/// Distinguishes domain enums (<c>model/enums</c>) from OpenAPI error Subcode/ErrorCode enums (<c>model/errors</c>).
 /// </summary>
 public static class GeneratedEnumKind
 {
@@ -31,7 +31,17 @@ public static class GeneratedEnumKind
     return typeName.EndsWith("Subcode", StringComparison.Ordinal);
   }
 
-  public static bool IsSubcodeClr(string clrType)
+  public static bool IsErrorCode(string typeName)
+  {
+    return typeName.EndsWith("ErrorCode", StringComparison.Ordinal);
+  }
+
+  public static bool IsErrorEnum(string typeName)
+  {
+    return IsSubcode(typeName) || IsErrorCode(typeName);
+  }
+
+  public static bool IsErrorEnumClr(string clrType)
   {
     var name = clrType.Trim();
     while (name.EndsWith("[]", StringComparison.Ordinal) || name.EndsWith("?", StringComparison.Ordinal))
@@ -41,16 +51,34 @@ public static class GeneratedEnumKind
         : name[..^1];
     }
 
-    return IsSubcode(name);
+    return IsErrorEnum(name);
+  }
+
+  public static bool IsSubcodeClr(string clrType)
+  {
+    return IsErrorEnumClr(clrType) && IsSubcode(StripClrSuffixes(clrType));
   }
 
   public static string NamespaceFor(string typeName)
   {
-    return IsSubcode(typeName) ? ErrorsNamespace : EnumsNamespace;
+    return IsErrorEnum(typeName) ? ErrorsNamespace : EnumsNamespace;
   }
 
   public static string OutputDirectory(string typeName, string enumsDir, string errorsDir)
   {
-    return IsSubcode(typeName) ? errorsDir : enumsDir;
+    return IsErrorEnum(typeName) ? errorsDir : enumsDir;
+  }
+
+  private static string StripClrSuffixes(string clrType)
+  {
+    var name = clrType.Trim();
+    while (name.EndsWith("[]", StringComparison.Ordinal) || name.EndsWith("?", StringComparison.Ordinal))
+    {
+      name = name.EndsWith("[]", StringComparison.Ordinal)
+        ? name[..^2]
+        : name[..^1];
+    }
+
+    return name;
   }
 }
