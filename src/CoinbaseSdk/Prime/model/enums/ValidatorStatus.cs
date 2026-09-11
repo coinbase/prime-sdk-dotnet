@@ -29,7 +29,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<ValidatorStatus>))]
   public enum ValidatorStatus
   {
-    VALIDATOR_STATUS_UNSPECIFIED,
     VALIDATOR_STATUS_PENDING,
     VALIDATOR_STATUS_ACTIVE,
     VALIDATOR_STATUS_EXITING,

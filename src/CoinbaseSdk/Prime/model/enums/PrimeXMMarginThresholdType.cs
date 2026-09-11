@@ -33,7 +33,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<PrimeXMMarginThresholdType>))]
   public enum PrimeXMMarginThresholdType
   {
-    MARGIN_THRESHOLD_TYPE_UNSPECIFIED,
     /// <summary>
     /// Threshold based on equity ratio EQ / MR; triggers when EQ / MR &gt;= threshold_value.
     /// </summary>

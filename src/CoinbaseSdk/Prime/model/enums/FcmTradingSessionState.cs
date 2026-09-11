@@ -38,10 +38,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   public enum FcmTradingSessionState
   {
     /// <summary>
-    /// Undefined session state.
-    /// </summary>
-    FCM_TRADING_SESSION_STATE_UNDEFINED,
-    /// <summary>
     /// Pre-open state, orders can be placed and cancelled.
     /// </summary>
     FCM_TRADING_SESSION_STATE_PRE_OPEN,

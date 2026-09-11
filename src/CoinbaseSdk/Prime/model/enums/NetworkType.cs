@@ -29,7 +29,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<NetworkType>))]
   public enum NetworkType
   {
-    NETWORK_TYPE_UNSPECIFIED,
     NETWORK_TYPE_EVM,
     NETWORK_TYPE_SOLANA
   }

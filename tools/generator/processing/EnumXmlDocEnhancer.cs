@@ -32,7 +32,7 @@ public static class EnumXmlDocEnhancer
   public static string Apply(string content, string enumName, SchemaDocumentationIndex index)
   {
     var entry = index.TryGet(enumName);
-    if (entry == null)
+    if (entry == null && !index.HasErrorCatalogDocs)
     {
       return content;
     }
@@ -48,7 +48,7 @@ public static class EnumXmlDocEnhancer
       if (enumMatch.Success &&
           string.Equals(enumMatch.Groups[1].Value, enumName, StringComparison.Ordinal) &&
           !XmlDocInsertionHelper.HasTypeDocBeforeMember(output) &&
-          !string.IsNullOrWhiteSpace(entry.TypeDoc))
+          !string.IsNullOrWhiteSpace(entry?.TypeDoc))
       {
         XmlDocInsertionHelper.InsertTypeDocBeforeMember(
           output,
@@ -59,7 +59,8 @@ public static class EnumXmlDocEnhancer
       if (memberMatch.Success && !XmlDocInsertionHelper.HasSummaryDocAbove(output))
       {
         var memberName = memberMatch.Groups[1].Value;
-        if (entry.EnumValueDocs.TryGetValue(memberName, out var memberDoc))
+        var memberDoc = ResolveMemberDoc(entry, memberName, index);
+        if (memberDoc != null)
         {
           output.AddRange(XmlDocInsertionHelper.SplitLines(GeneratorXmlDoc.FormatEnumMemberSummary(memberDoc)));
         }
@@ -69,6 +70,18 @@ public static class EnumXmlDocEnhancer
     }
 
     return string.Join('\n', output);
+  }
+
+  private static string? ResolveMemberDoc(SchemaDocEntry? entry, string memberName, SchemaDocumentationIndex index)
+  {
+    if (entry != null &&
+        entry.EnumValueDocs.TryGetValue(memberName, out var memberDoc) &&
+        !string.IsNullOrWhiteSpace(memberDoc))
+    {
+      return memberDoc;
+    }
+
+    return index.TryGetErrorCatalogDoc(memberName);
   }
 
   internal static Dictionary<string, string> ParseEnumValueDescriptions(string description)

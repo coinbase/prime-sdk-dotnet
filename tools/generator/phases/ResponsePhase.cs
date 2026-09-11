@@ -54,7 +54,8 @@ public static class ResponsePhase
     var schema = SpecParser.ResolveRef(doc.Root, op.SuccessResponseSchemaRef);
     var props = OpenApiSchemaCodegen.ListProperties(doc.Root, schema, transforms);
     var useModel = props.Any(p => p.UsesModel);
-    var useEnums = props.Any(p => p.UsesEnum);
+    var useDomainEnums = props.Any(p => p.UsesEnum && !GeneratedEnumKind.IsErrorEnumClr(p.ClrType));
+    var useErrorEnums = props.Any(p => p.UsesEnum && GeneratedEnumKind.IsErrorEnumClr(p.ClrType));
     // Pagination is in CoinbaseSdk.Prime.Common, not Model
     var useCommon = props.Any(p =>
       string.Equals(p.ClrType, "Pagination", StringComparison.Ordinal) ||
@@ -75,12 +76,17 @@ public static class ResponsePhase
       sb.AppendLine("  using CoinbaseSdk.Prime.Model;");
     }
 
-    if (useEnums)
+    if (useDomainEnums)
     {
-      sb.AppendLine("  using CoinbaseSdk.Prime.Model.Enums;");
+      sb.AppendLine($"  {GeneratedEnumKind.EnumsUsing}");
     }
 
-    if (useJson || useCommon || useModel || useEnums)
+    if (useErrorEnums)
+    {
+      sb.AppendLine($"  {GeneratedEnumKind.ErrorsUsing}");
+    }
+
+    if (useJson || useCommon || useModel || useDomainEnums || useErrorEnums)
     {
       sb.AppendLine();
     }

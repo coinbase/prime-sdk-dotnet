@@ -35,10 +35,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   public enum RiskManagementType
   {
     /// <summary>
-    /// Unspecified risk management type.
-    /// </summary>
-    RISK_MANAGEMENT_TYPE_UNSPECIFIED,
-    /// <summary>
     /// Risk is managed by FCM (Futures Commission Merchant).
     /// </summary>
     RISK_MANAGEMENT_TYPE_MANAGED_BY_FCM,

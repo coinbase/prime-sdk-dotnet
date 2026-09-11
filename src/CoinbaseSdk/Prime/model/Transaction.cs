@@ -78,6 +78,7 @@ namespace CoinbaseSdk.Prime.Model
     /// - ONCHAIN_TRANSACTION: On-chain transaction initiated with Prime Onchain Wallet.
     /// - PORTFOLIO_STAKE: Portfolio-level staking operation.
     /// - PORTFOLIO_UNSTAKE: Portfolio-level unstaking operation.
+    /// - MERGE_STAKE: On-chain transaction consolidating funds from different addresses belonging to the same wallet.
     /// </summary>
     public TransactionType? Type { get; set; }
     /// <summary>

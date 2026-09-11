@@ -21,7 +21,7 @@ namespace CoinbaseSdk.Prime.Products
   public interface IProductsService
   {
     /// <summary>
-    /// Get Public Product Candles (Beta).
+    /// Get Public Product Candles.
     /// </summary>
     public GetCandlesResponse GetCandles(
       GetCandlesRequest request,

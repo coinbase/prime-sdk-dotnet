@@ -20,7 +20,7 @@ namespace CoinbaseSdk.Prime.Products
   using CoinbaseSdk.Core.Error;
 
   /// <summary>
-  /// Get Public Product Candles (Beta).
+  /// Get Public Product Candles.
   /// </summary>
   public class GetCandlesRequest(string portfolioId)
   {

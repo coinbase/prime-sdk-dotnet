@@ -185,27 +185,46 @@ public class SharedTransforms
       }
     }
 
-    var referencesEnum = actualEnumNames.Any(enumName =>
+    var referencesDomainEnum = actualEnumNames.Any(enumName =>
+      !GeneratedEnumKind.IsErrorEnum(enumName) &&
       Regex.IsMatch(content, $@"\b{Regex.Escape(enumName)}\b"));
-    if (referencesEnum && !content.Contains("using CoinbaseSdk.Prime.Model.Enums;", StringComparison.Ordinal))
+    var referencesErrorEnum = actualEnumNames.Any(enumName =>
+      GeneratedEnumKind.IsErrorEnum(enumName) &&
+      Regex.IsMatch(content, $@"\b{Regex.Escape(enumName)}\b"));
+
+    if (referencesDomainEnum)
     {
-      if (content.Contains("using System.Text.Json.Serialization;", StringComparison.Ordinal))
-      {
-        content = content.Replace(
-          "using System.Text.Json.Serialization;\n",
-          "using System.Text.Json.Serialization;\n  using CoinbaseSdk.Prime.Model.Enums;\n",
-          StringComparison.Ordinal);
-      }
-      else
-      {
-        content = Regex.Replace(
-          content,
-          @"(namespace\s+CoinbaseSdk\.Prime\.Model\s*\{?\s*\n)",
-          "$1  using CoinbaseSdk.Prime.Model.Enums;\n");
-      }
+      content = EnsureUsing(content, GeneratedEnumKind.EnumsUsing);
+    }
+
+    if (referencesErrorEnum)
+    {
+      content = EnsureUsing(content, GeneratedEnumKind.ErrorsUsing);
     }
 
     return content;
+  }
+
+  private static string EnsureUsing(string content, string usingStatement)
+  {
+    if (content.Contains(usingStatement, StringComparison.Ordinal))
+    {
+      return content;
+    }
+
+    var indented = "  " + usingStatement + "\n";
+    if (content.Contains("using System.Text.Json.Serialization;", StringComparison.Ordinal))
+    {
+      return content.Replace(
+        "using System.Text.Json.Serialization;\n",
+        "using System.Text.Json.Serialization;\n" + indented,
+        StringComparison.Ordinal);
+    }
+
+    return Regex.Replace(
+      content,
+      @"(namespace\s+CoinbaseSdk\.Prime\.Model\s*\{?\s*\n)",
+      "$1" + indented);
   }
 
   public static string DeduplicateUsings(string content)

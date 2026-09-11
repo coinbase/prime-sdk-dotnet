@@ -153,7 +153,7 @@ namespace CoinbaseSdk.Prime.Orders
       CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Edit Order (Beta).
+    /// Edit Order.
     /// </summary>
     public EditOrderResponse EditOrder(
       EditOrderRequest request,

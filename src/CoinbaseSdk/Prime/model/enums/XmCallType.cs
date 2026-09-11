@@ -34,7 +34,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<XmCallType>))]
   public enum XmCallType
   {
-    XM_CALL_TYPE_UNSPECIFIED,
     /// <summary>
     /// Evaluated at standard margin call evaluation time.
     /// </summary>

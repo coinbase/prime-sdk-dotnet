@@ -33,7 +33,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<PrimeXMMarginRequirementType>))]
   public enum PrimeXMMarginRequirementType
   {
-    MARGIN_REQUIREMENT_TYPE_UNSPECIFIED,
     /// <summary>
     /// Integrated (netted) cross-margin requirement for spot assets and all derivatives contracts.
     /// </summary>

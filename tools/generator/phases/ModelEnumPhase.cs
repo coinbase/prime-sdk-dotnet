@@ -30,6 +30,7 @@ public class ModelEnumPhase
     string modelOutputDir,
     string commonOutputDir,
     string enumsDir,
+    string errorsDir,
     IReadOnlyDictionary<string, string> commonModels,
     GeneratorConfiguration configuration)
   {
@@ -45,6 +46,7 @@ public class ModelEnumPhase
       modelOutputDir,
       commonOutputDir,
       enumsDir,
+      errorsDir,
       commonModels,
       specInputPath,
       configuration);

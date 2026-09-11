@@ -21,6 +21,16 @@ namespace CoinbaseSdk.Prime.Financing
   public interface IFinancingService
   {
     /// <summary>
+    /// Get Conversion Fees.
+    /// </summary>
+    public GetConversionFeesResponse GetConversionFees(
+      CallOptions? options = null);
+
+    public Task<GetConversionFeesResponse> GetConversionFeesAsync(
+      CallOptions? options = null,
+      CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// List Financing Eligible Assets.
     /// </summary>
     public ListFinancingEligibleAssetsResponse ListFinancingEligibleAssets(
@@ -199,6 +209,30 @@ namespace CoinbaseSdk.Prime.Financing
       CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Get Cross Margin Liquidation.
+    /// </summary>
+    public GetCrossMarginLiquidationResponse GetCrossMarginLiquidation(
+      GetCrossMarginLiquidationRequest request,
+      CallOptions? options = null);
+
+    public Task<GetCrossMarginLiquidationResponse> GetCrossMarginLiquidationAsync(
+      GetCrossMarginLiquidationRequest request,
+      CallOptions? options = null,
+      CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// List Cross Margin Liquidations.
+    /// </summary>
+    public ListCrossMarginLiquidationsResponse ListCrossMarginLiquidations(
+      ListCrossMarginLiquidationsRequest request,
+      CallOptions? options = null);
+
+    public Task<ListCrossMarginLiquidationsResponse> ListCrossMarginLiquidationsAsync(
+      ListCrossMarginLiquidationsRequest request,
+      CallOptions? options = null,
+      CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Get Cross Margin Risk Parameters.
     /// </summary>
     public GetCrossMarginRiskParametersResponse GetCrossMarginRiskParameters(
@@ -207,6 +241,30 @@ namespace CoinbaseSdk.Prime.Financing
 
     public Task<GetCrossMarginRiskParametersResponse> GetCrossMarginRiskParametersAsync(
       GetCrossMarginRiskParametersRequest request,
+      CallOptions? options = null,
+      CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Get Entity Rewards Rate (Beta).
+    /// </summary>
+    public GetEntityRewardsRateResponse GetEntityRewardsRate(
+      GetEntityRewardsRateRequest request,
+      CallOptions? options = null);
+
+    public Task<GetEntityRewardsRateResponse> GetEntityRewardsRateAsync(
+      GetEntityRewardsRateRequest request,
+      CallOptions? options = null,
+      CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Get Portfolio Rewards Rate (Beta).
+    /// </summary>
+    public GetPortfolioRewardsRateResponse GetPortfolioRewardsRate(
+      GetPortfolioRewardsRateRequest request,
+      CallOptions? options = null);
+
+    public Task<GetPortfolioRewardsRateResponse> GetPortfolioRewardsRateAsync(
+      GetPortfolioRewardsRateRequest request,
       CallOptions? options = null,
       CancellationToken cancellationToken = default);
 

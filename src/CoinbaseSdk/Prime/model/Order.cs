@@ -192,9 +192,14 @@ namespace CoinbaseSdk.Prime.Model
     /// - UNKNOWN_PRODUCT_TYPE: Unknown product type.
     /// - SPOT: Spot product.
     /// - FUTURE: Future product.
+    /// - OPTION: Option product.
     /// </summary>
     public ProductType? ProductType { get; set; }
     public CommissionDetailTotal? CommissionDetailTotal { get; set; }
+    /// <summary>
+    /// Indicates if this was a buy exact order (fees charged on top of quote size for BUY orders sized in quote)
+    /// </summary>
+    public bool? IsBuyExact { get; set; }
     public Order() { }
 
     public Order(Builder builder)
@@ -236,6 +241,7 @@ namespace CoinbaseSdk.Prime.Model
       this.WigLevel = builder.wigLevel;
       this.ProductType = builder.productType;
       this.CommissionDetailTotal = builder.commissionDetailTotal;
+      this.IsBuyExact = builder.isBuyExact;
     }
 
     public class Builder
@@ -278,6 +284,7 @@ namespace CoinbaseSdk.Prime.Model
       internal string? wigLevel;
       internal ProductType? productType;
       internal CommissionDetailTotal? commissionDetailTotal;
+      internal bool? isBuyExact;
 #pragma warning restore SA1307, SA1401
       public Builder WithId(string? id)
       {
@@ -462,6 +469,11 @@ namespace CoinbaseSdk.Prime.Model
       public Builder WithCommissionDetailTotal(CommissionDetailTotal? commissionDetailTotal)
       {
         this.commissionDetailTotal = commissionDetailTotal;
+        return this;
+      }
+      public Builder WithIsBuyExact(bool? isBuyExact)
+      {
+        this.isBuyExact = isBuyExact;
         return this;
       }
       public Order Build()

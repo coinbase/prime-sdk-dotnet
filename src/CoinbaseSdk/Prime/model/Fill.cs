@@ -86,6 +86,7 @@ namespace CoinbaseSdk.Prime.Model
     /// - UNKNOWN_PRODUCT_TYPE: Unknown product type.
     /// - SPOT: Spot product.
     /// - FUTURE: Future product.
+    /// - OPTION: Option product.
     /// </summary>
     public ProductType? ProductType { get; set; }
     public CommissionDetailTotal? CommissionDetailTotal { get; set; }

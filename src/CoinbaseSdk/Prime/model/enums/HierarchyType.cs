@@ -32,7 +32,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<HierarchyType>))]
   public enum HierarchyType
   {
-    HIERARCHY_TYPE_UNSPECIFIED,
     HIERARCHY_TYPE_PORTFOLIO,
     HIERARCHY_TYPE_ENTITY
   }

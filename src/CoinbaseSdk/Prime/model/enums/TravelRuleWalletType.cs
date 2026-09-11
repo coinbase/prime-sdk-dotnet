@@ -35,10 +35,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   public enum TravelRuleWalletType
   {
     /// <summary>
-    /// Default unspecified wallet type.
-    /// </summary>
-    TRAVEL_RULE_WALLET_TYPE_UNSPECIFIED,
-    /// <summary>
     /// Centralized exchange wallet.
     /// </summary>
     TRAVEL_RULE_WALLET_TYPE_VASP,

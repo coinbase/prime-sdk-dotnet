@@ -32,7 +32,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<TravelRuleStatus>))]
   public enum TravelRuleStatus
   {
-    TRAVEL_RULE_STATUS_UNSPECIFIED,
     TRAVEL_RULE_STATUS_PENDING,
     TRAVEL_RULE_STATUS_SUBMITTED
   }

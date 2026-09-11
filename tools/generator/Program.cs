@@ -98,6 +98,7 @@ try
   var modelDir = Path.Combine(primeRoot, "model");
   var commonDir = Path.Combine(primeRoot, "common");
   var enumsDir = Path.Combine(modelDir, "enums");
+  var errorsDir = Path.Combine(modelDir, "errors");
   var tempDir = Path.Combine(projectRoot, "generated", "model-cli");
 
   if (!dryRun && !diffMode)
@@ -111,6 +112,7 @@ try
       modelDir,
       commonDir,
       enumsDir,
+      errorsDir,
       cfg.CommonModels,
       cfg);
   }

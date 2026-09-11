@@ -36,7 +36,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<XmLiquidationStatus>))]
   public enum XmLiquidationStatus
   {
-    XM_LIQUIDATION_STATUS_UNSET,
     /// <summary>
     /// Liquidation is in the pre-liquidation phase.
     /// </summary>

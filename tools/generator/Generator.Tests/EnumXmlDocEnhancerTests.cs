@@ -96,6 +96,33 @@ public class EnumXmlDocEnhancerTests
     Assert.True(enumLine > converterLine);
   }
 
+  [Fact]
+  public void Apply_UsesErrorCatalogForMemberDocs()
+  {
+    const string source = """
+      namespace CoinbaseSdk.Prime.Model.Errors
+      {
+        public enum BadRequestErrorCode
+        {
+          VALIDATION_ERROR,
+        }
+      }
+      """;
+
+    var index = new SchemaDocumentationIndex();
+    var catalog = typeof(SchemaDocumentationIndex).GetField(
+      "_errorCatalogDocs",
+      System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)!;
+    catalog.SetValue(index, new Dictionary<string, string>(StringComparer.Ordinal)
+    {
+      ["VALIDATION_ERROR"] = "One or more request fields are invalid",
+    });
+
+    var result = EnumXmlDocEnhancer.Apply(source, "BadRequestErrorCode", index);
+
+    Assert.Contains("/// One or more request fields are invalid.", result);
+  }
+
   private static SchemaDocumentationIndex BuildIndex(
     string clrName,
     bool isEnum,

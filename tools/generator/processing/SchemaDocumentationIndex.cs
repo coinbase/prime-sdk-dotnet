@@ -42,6 +42,16 @@ public sealed class SchemaDocumentationIndex
   private readonly Dictionary<string, SchemaDocEntry> _byClrName =
     new(StringComparer.Ordinal);
 
+  private readonly Dictionary<string, string> _errorCatalogDocs =
+    new(StringComparer.Ordinal);
+
+  public bool HasErrorCatalogDocs => _errorCatalogDocs.Count > 0;
+
+  public string? TryGetErrorCatalogDoc(string memberName)
+  {
+    return _errorCatalogDocs.TryGetValue(memberName, out var doc) ? doc : null;
+  }
+
   public static async Task<SchemaDocumentationIndex> LoadAsync(
     string yamlPath,
     SharedTransforms transforms,
@@ -53,20 +63,21 @@ public sealed class SchemaDocumentationIndex
     var yaml = new YamlStream();
     yaml.Load(reader);
     var root = (YamlMappingNode)yaml.Documents[0].RootNode;
+    var index = new SchemaDocumentationIndex();
+    LoadErrorCatalogDocs(root, index._errorCatalogDocs);
 
     if (!root.Children.ContainsKey(new YamlScalarNode("components")))
     {
-      return new SchemaDocumentationIndex();
+      return index;
     }
 
     var components = (YamlMappingNode)root.Children[new YamlScalarNode("components")];
     if (!components.Children.ContainsKey(new YamlScalarNode("schemas")))
     {
-      return new SchemaDocumentationIndex();
+      return index;
     }
 
     var schemas = (YamlMappingNode)components.Children[new YamlScalarNode("schemas")];
-    var index = new SchemaDocumentationIndex();
 
     foreach (var entry in schemas.Children)
     {
@@ -165,6 +176,60 @@ public sealed class SchemaDocumentationIndex
     }
 
     return clrName;
+  }
+
+  internal static void LoadErrorCatalogDocs(YamlMappingNode root, IDictionary<string, string> catalog)
+  {
+    if (!root.Children.ContainsKey(new YamlScalarNode("tags")))
+    {
+      return;
+    }
+
+    if (root.Children[new YamlScalarNode("tags")] is not YamlSequenceNode tags)
+    {
+      return;
+    }
+
+    foreach (var tagNode in tags.Children)
+    {
+      if (tagNode is not YamlMappingNode tag)
+      {
+        continue;
+      }
+
+      AddCatalogEntries(tag, "x-error-codes", catalog);
+      AddCatalogEntries(tag, "x-subcodes", catalog);
+    }
+  }
+
+  private static void AddCatalogEntries(YamlMappingNode tag, string key, IDictionary<string, string> catalog)
+  {
+    if (!tag.Children.ContainsKey(new YamlScalarNode(key)))
+    {
+      return;
+    }
+
+    if (tag.Children[new YamlScalarNode(key)] is not YamlSequenceNode sequence)
+    {
+      return;
+    }
+
+    foreach (var item in sequence.Children)
+    {
+      if (item is not YamlMappingNode mapping)
+      {
+        continue;
+      }
+
+      var name = StringFromYaml(mapping, "name");
+      var description = StringFromYaml(mapping, "description");
+      if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(description))
+      {
+        continue;
+      }
+
+      catalog[name] = description.Trim();
+    }
   }
 
   private static bool IsEnumSchema(YamlMappingNode schemaNode)

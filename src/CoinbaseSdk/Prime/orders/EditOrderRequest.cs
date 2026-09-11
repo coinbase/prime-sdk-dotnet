@@ -20,7 +20,7 @@ namespace CoinbaseSdk.Prime.Orders
   using CoinbaseSdk.Core.Error;
 
   /// <summary>
-  /// Edit Order (Beta).
+  /// Edit Order.
   /// </summary>
   public class EditOrderRequest(string portfolioId, string orderId)
   {
@@ -50,6 +50,10 @@ namespace CoinbaseSdk.Prime.Orders
 
     public string? StopPrice { get; set; }
 
+    public string? Offset { get; set; }
+
+    public string? WigLevel { get; set; }
+
     public class EditOrderRequestBuilder
     {
       private string? _portfolioId;
@@ -64,6 +68,8 @@ namespace CoinbaseSdk.Prime.Orders
       private string? _displayQuoteSize;
       private string? _displayBaseSize;
       private string? _stopPrice;
+      private string? _offset;
+      private string? _wigLevel;
 
       public EditOrderRequestBuilder WithPortfolioId(string portfolioId)
       {
@@ -137,6 +143,18 @@ namespace CoinbaseSdk.Prime.Orders
         return this;
       }
 
+      public EditOrderRequestBuilder WithOffset(string? offset)
+      {
+        _offset = offset;
+        return this;
+      }
+
+      public EditOrderRequestBuilder WithWigLevel(string? wigLevel)
+      {
+        _wigLevel = wigLevel;
+        return this;
+      }
+
       private void Validate()
       {
         if (string.IsNullOrWhiteSpace(_portfolioId))
@@ -164,6 +182,8 @@ namespace CoinbaseSdk.Prime.Orders
           DisplayQuoteSize = _displayQuoteSize,
           DisplayBaseSize = _displayBaseSize,
           StopPrice = _stopPrice,
+          Offset = _offset,
+          WigLevel = _wigLevel,
         };
       }
     }

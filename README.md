@@ -109,7 +109,7 @@ On Unix systems with executable permissions set, examples can also be invoked di
 ./src/CoinbaseSdk/PrimeExample/examples/portfolios/ListPortfolios.cs
 ```
 
-Available example categories: `activities`, `addressbook`, `advancedtransfer`, `allocations`, `assets`, `balances`, `commission`, `financing`, `futures`, `invoice`, `onchainaddressbook`, `orders`, `paymentmethods`, `portfolios`, `positions`, `products`, `staking`, `transactions`, `users`, `wallets`.
+Available example categories: `activities`, `addressbook`, `advancedtransfer`, `allocations`, `assets`, `balances`, `commission`, `errors`, `financing`, `futures`, `invoice`, `onchainaddressbook`, `orders`, `paymentmethods`, `portfolios`, `positions`, `products`, `staking`, `transactions`, `users`, `wallets`.
 
 ## 🚨 Security and Bug Reports
 

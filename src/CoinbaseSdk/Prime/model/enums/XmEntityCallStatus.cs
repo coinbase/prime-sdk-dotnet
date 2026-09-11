@@ -38,7 +38,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<XmEntityCallStatus>))]
   public enum XmEntityCallStatus
   {
-    XM_ENTITY_CALL_STATUS_UNSPECIFIED,
     /// <summary>
     /// There are no margin calls or debit calls.
     /// </summary>

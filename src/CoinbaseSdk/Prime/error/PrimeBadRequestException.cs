@@ -1,5 +1,5 @@
 /*
- * Copyright 2024-present Coinbase Global, Inc.
+ * Copyright 2026-present Coinbase Global, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,18 @@
  * limitations under the License.
  */
 
-namespace CoinbaseSdk.Core.Error
+namespace CoinbaseSdk.Prime.Error
 {
-  public class CoinbasePrimeErrorMessage : ICoinbaseErrorMessage
+  using System.Net;
+
+  /// <summary>
+  /// Thrown when the Prime API returns HTTP 400.
+  /// </summary>
+  public class PrimeBadRequestException : CoinbasePrimeException
   {
-    public CoinbasePrimeErrorMessage(string message)
+    public PrimeBadRequestException(PrimeErrorResponse body)
+      : base(HttpStatusCode.BadRequest, body)
     {
-      Message = message;
-    }
-
-    public string Message { get; set; }
-
-    public CoinbaseException CreateCoinbaseException()
-    {
-      return new CoinbaseException(Message);
     }
   }
 }
-

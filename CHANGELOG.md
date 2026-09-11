@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.8.0] - 2026-SEP-08
+
+### Added
+
+- **`CoinbasePrimeException`** (and HTTP status subclasses such as **`PrimeBadRequestException`**, **`PrimeNotFoundException`**) expose API **`code`**, **`subcode`**, and **`trace_id`** from error bodies.
+- Status-level **`\*ErrorCode`** enums now live under `src/CoinbaseSdk/Prime/model/errors` (`CoinbaseSdk.Prime.Model.Errors`) alongside Subcode enums.
+- Example: `src/CoinbaseSdk/PrimeExample/examples/errors/HandleApiErrors.cs`
+- **`EncryptedCredentialsDecoder`**: decrypts `RotateAPIKeyResponse.EncryptedCredentials` with HKDF-SHA256 + AES-256-GCM using the current signing key (BCL only).
+
+### Changed
+
+- Unsuccessful HTTP responses now throw **`CoinbasePrimeException`** (still a **`CoinbaseException`**) instead of a message-only exception that dropped status and error codes.
+- **`GetXMLiquidation`** / **`ListXMLiquidations`** renamed to **`GetCrossMarginLiquidation`** / **`ListCrossMarginLiquidations`** (request/response types follow the same names).
+- Reward rate methods drop the **`PrimeBeta_`** prefix: **`GetEntityRewardsRate`**, **`GetPortfolioRewardsRate`**.
+
 ## [0.7.0] - 2026-JUN-18
 
 ### Changed

@@ -39,12 +39,17 @@ namespace CoinbaseSdk.Prime.Model
     /// Optional validator address, defaults to Coinbase validator. For SOL, must be the vote account address. Ignored for ETH.
     /// </summary>
     public string? ValidatorAddress { get; set; }
+    /// <summary>
+    /// Optional delegation end date in ISO date format (e.g. 2026-07-15). Required for AVAX; minimum 14-day delegation period applies.
+    /// </summary>
+    public string? EndDate { get; set; }
     public WalletStakeInputs() { }
 
     public WalletStakeInputs(Builder builder)
     {
       this.Amount = builder.amount;
       this.ValidatorAddress = builder.validatorAddress;
+      this.EndDate = builder.endDate;
     }
 
     public class Builder
@@ -52,6 +57,7 @@ namespace CoinbaseSdk.Prime.Model
 #pragma warning disable SA1307, SA1401
       internal string? amount;
       internal string? validatorAddress;
+      internal string? endDate;
 #pragma warning restore SA1307, SA1401
       public Builder WithAmount(string? amount)
       {
@@ -61,6 +67,11 @@ namespace CoinbaseSdk.Prime.Model
       public Builder WithValidatorAddress(string? validatorAddress)
       {
         this.validatorAddress = validatorAddress;
+        return this;
+      }
+      public Builder WithEndDate(string? endDate)
+      {
+        this.endDate = endDate;
         return this;
       }
       public WalletStakeInputs Build()

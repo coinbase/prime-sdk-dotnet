@@ -69,6 +69,7 @@ namespace CoinbaseSdk.Prime.Model
     /// - UNKNOWN_PRODUCT_TYPE: Unknown product type.
     /// - SPOT: Spot product.
     /// - FUTURE: Future product.
+    /// - OPTION: Option product.
     /// </summary>
     public ProductType? ProductType { get; set; }
     /// <summary>
@@ -79,6 +80,10 @@ namespace CoinbaseSdk.Prime.Model
     /// FutureProductDetails contains details specific to futures products.
     /// </summary>
     public FutureProductDetails? FutureProductDetails { get; set; }
+    /// <summary>
+    /// OptionProductDetails contains details specific to option products.
+    /// </summary>
+    public OptionProductDetails? OptionProductDetails { get; set; }
     public Product() { }
 
     public Product(Builder builder)
@@ -96,6 +101,7 @@ namespace CoinbaseSdk.Prime.Model
       this.ProductType = builder.productType;
       this.FcmTradingSessionDetails = builder.fcmTradingSessionDetails;
       this.FutureProductDetails = builder.futureProductDetails;
+      this.OptionProductDetails = builder.optionProductDetails;
     }
 
     public class Builder
@@ -114,6 +120,7 @@ namespace CoinbaseSdk.Prime.Model
       internal ProductType? productType;
       internal FcmTradingSessionDetails? fcmTradingSessionDetails;
       internal FutureProductDetails? futureProductDetails;
+      internal OptionProductDetails? optionProductDetails;
 #pragma warning restore SA1307, SA1401
       public Builder WithId(string? id)
       {
@@ -178,6 +185,11 @@ namespace CoinbaseSdk.Prime.Model
       public Builder WithFutureProductDetails(FutureProductDetails? futureProductDetails)
       {
         this.futureProductDetails = futureProductDetails;
+        return this;
+      }
+      public Builder WithOptionProductDetails(OptionProductDetails? optionProductDetails)
+      {
+        this.optionProductDetails = optionProductDetails;
         return this;
       }
       public Product Build()

@@ -29,7 +29,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<UnstakeType>))]
   public enum UnstakeType
   {
-    UNSTAKE_TYPE_UNSPECIFIED,
     UNSTAKE_TYPE_PARTIAL,
     UNSTAKE_TYPE_FULL
   }

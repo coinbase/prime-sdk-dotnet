@@ -19,7 +19,7 @@ namespace CoinbaseSdk.Prime.Products
   using CoinbaseSdk.Prime.Model;
 
   /// <summary>
-  /// Get Public Product Candles (Beta).
+  /// Get Public Product Candles.
   /// </summary>
   public class GetCandlesResponse
   {

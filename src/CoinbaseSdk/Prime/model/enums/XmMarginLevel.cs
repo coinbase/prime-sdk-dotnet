@@ -36,7 +36,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<XmMarginLevel>))]
   public enum XmMarginLevel
   {
-    XM_MARGIN_LEVEL_UNSPECIFIED,
     /// <summary>
     /// Margin level is healthy.
     /// </summary>

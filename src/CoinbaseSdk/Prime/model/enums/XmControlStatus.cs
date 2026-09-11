@@ -34,7 +34,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<XmControlStatus>))]
   public enum XmControlStatus
   {
-    XM_CONTROL_STATUS_UNSPECIFIED,
     /// <summary>
     /// Allowed to trade and withdraw. See XM Margin Methodology for full description of when trading and withdrawals are enabled or disabled.
     /// </summary>

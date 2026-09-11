@@ -42,6 +42,8 @@ namespace CoinbaseSdk.Prime.Model.Enums
   /// i.e. coinbase pays rebates for staking fees to eligible delegators.
   /// - BUIDL_DIVIDEND: A BUIDL dividend reward.
   /// i.e. dividends from BUIDL fund holdings.
+  /// - CUSTOM_STABLECOIN_REWARD: A custom stablecoin reward.
+  /// i.e. USDC reward payouts.
   /// </summary>
   [JsonConverter(typeof(JsonStringEnumConverter<RewardSubtype>))]
   public enum RewardSubtype
@@ -73,6 +75,10 @@ namespace CoinbaseSdk.Prime.Model.Enums
     /// <summary>
     /// A BUIDL dividend reward.
     /// </summary>
-    BUIDL_DIVIDEND
+    BUIDL_DIVIDEND,
+    /// <summary>
+    /// A custom stablecoin reward.
+    /// </summary>
+    CUSTOM_STABLECOIN_REWARD
   }
 }

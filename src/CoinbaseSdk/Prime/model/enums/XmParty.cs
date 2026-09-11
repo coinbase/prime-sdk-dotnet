@@ -33,7 +33,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   [JsonConverter(typeof(JsonStringEnumConverter<XmParty>))]
   public enum XmParty
   {
-    XM_PARTY_UNSPECIFIED,
     /// <summary>
     /// Coinbase Exchange, trading venue that can receive the XM loan.
     /// </summary>

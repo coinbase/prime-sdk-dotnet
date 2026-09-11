@@ -38,10 +38,6 @@ namespace CoinbaseSdk.Prime.Model.Enums
   public enum FcmMarginHealthState
   {
     /// <summary>
-    /// Unspecified margin health state.
-    /// </summary>
-    FCM_MARGIN_HEALTH_STATE_UNSPECIFIED,
-    /// <summary>
     /// Account margin is healthy.
     /// </summary>
     FCM_MARGIN_HEALTH_STATE_HEALTHY,

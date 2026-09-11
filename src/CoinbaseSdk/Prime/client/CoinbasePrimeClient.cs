@@ -23,6 +23,7 @@ namespace CoinbaseSdk.Prime.Client
   using CoinbaseSdk.Core.Error;
   using CoinbaseSdk.Core.Http;
   using CoinbaseSdk.Core.Serialization;
+  using CoinbaseSdk.Prime.Error;
   using CoinbaseSdk.Prime.Serialization;
 
   public class CoinbasePrimeClient : CoinbaseClient
@@ -135,17 +136,7 @@ namespace CoinbaseSdk.Prime.Client
     {
       if (!expectedStatusCodes.Contains(response.StatusCode))
       {
-        CoinbasePrimeErrorMessage errorMessage;
-        try
-        {
-          errorMessage = this.JsonUtility.Deserialize<CoinbasePrimeErrorMessage>(response.Content);
-        }
-        catch (Exception)
-        {
-          throw new CoinbaseException(response.StatusCode, response.Content);
-        }
-
-        throw errorMessage.CreateCoinbaseException();
+        throw CoinbasePrimeException.FromResponse(response.StatusCode, response.Content, this.JsonUtility);
       }
     }
   }
